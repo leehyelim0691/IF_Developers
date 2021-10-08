@@ -7,7 +7,7 @@ import Practice1 from './Page/Practice1.js';
 function App() {
   return (
     // <Practice/>
-    <Practice1/>
+    <Main/>
     // <Main/>
   );
 }
