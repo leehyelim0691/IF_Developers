@@ -1,0 +1,57 @@
+[
+    {
+        "page_label": "이력서 Form",
+        "fields": [
+            {
+                "field_id": "english_name",
+                "field_label": "이름",
+                "field_mandatory": "yes",
+                "field_placeholder": "이름을 입력하세요",
+                "field_type": "text",
+                "field_value": ""
+            },
+            {
+                "field_id": "email",
+                "field_label": "이메일",
+                "field_mandatory": "yes",
+                "field_placeholder": "이메일을 입력하세요",
+                "field_type": "text"
+            },
+            {
+                "field_id": "employment",
+                "field_label": "종류",
+                "field_value": "Part-Time",
+                "field_mandatory": "yes",
+                "field_options": [
+                    {
+                        "option_label": "정직원"
+                    },
+                    {
+                        "option_label": "알바"
+                    }
+                ],
+                "field_type": "select"
+            },
+            {
+                "field_id": "contact",
+                "field_label": "연락처",
+                "field_mandatory": "yes",
+                "field_placeholder": "휴대폰 번호를 입력하세요",
+                "field_type": "text"
+            },
+            {
+                "field_id": "driving_license",
+                "field_label": "운전면허가 있습니다.",
+                "field_type": "checkbox",
+                "field_value": "checked"
+            },
+            {
+                "field_id": "identity",
+                "field_label": "자동차 번호",
+                "field_mandatory": "yes",
+                "field_placeholder": "차번호를 입력하세요",
+                "field_type": "text"
+            }
+        ]
+    }
+]
