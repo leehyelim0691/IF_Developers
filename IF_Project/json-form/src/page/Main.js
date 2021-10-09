@@ -1,6 +1,6 @@
 import '../css/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Button, Form, FormGroup, Label} from 'reactstrap';
+import { Container, Button, Form, FormGroup, Label, Col, Row} from 'reactstrap';
 import React,{useState,useEffect} from 'react';
 import Element from '../components/Element';
 import { FormContext } from '../FormContext';
@@ -10,10 +10,13 @@ function Main() {
   const [clicked, setClicked] = useState(false);
   const [schema,setSchema] = useState();
   const [elements, setElements] = useState(null);
-  const [form, setForm] = useState('{\n"page_label": "이력서 Form",\
-  "fields": [{}');
+  // const [form, setForm] = useState('{\n"page_label": "이력서 Form",\
+  // "fields": [{}');
+  const [form, setForm] = useState('[\n"page_label": "이력서 Form",\n"fields": [\n');
   const [rSelected, setRSelected] = useState(null);
+  const [cSelected, setCSelected] = useState([]);
   const [json, setJson] = useState(null);
+  const [count, setCount] = useState(0);
   
   const { fields, page_label } = elements ?? {}
 
@@ -25,12 +28,26 @@ function Main() {
     setForm(e.target.value);
   }
 
-  const onClickEnter = () => {
+  const onClickCreate = () => {
     var schema = document.getElementById('json-editor').value;
     var myobj=JSON.parse(schema);
     setElements(myobj);
     setClicked(true);
   };
+
+  const onClickCheck = (selected) => {
+    const index = cSelected.indexOf(selected);
+    if (index < 0) {
+      cSelected.push(selected);
+    } else {
+      cSelected.splice(index, 1);
+    }
+    setCSelected([...cSelected]);
+
+    if(cSelected.length!=0){
+      setForm(form + "\n]}");
+    }
+  }
 
   const handleChange = (id, event) => {
     const newElements = { ...elements }
@@ -54,7 +71,13 @@ function Main() {
 
   const addJson = e => {
     setRSelected(e); 
-    setForm(form+","+JSON.stringify(json[e],null, 4));
+    if(count == 0){
+      setForm(form + JSON.stringify(json[e],null, 4));
+    }
+    else{
+      setForm(form+","+JSON.stringify(json[e],null, 4));
+    }
+    setCount(count+1);
   }
     
   return (
@@ -77,11 +100,16 @@ function Main() {
       <div className="editor-container">
         <div className="editor-box" >
           <div className="editor-head"><h5>JSONSchema</h5></div> 
-          <textarea className="json-editor" id="json-editor" value={form+']}'} onChange={textChange}>{schema}</textarea>
-          <div>
-            <button className="btn btn-large btn-secondary create-btn" onClick={onClickEnter}>Create</button>
+            <textarea className="json-editor" id="json-editor" value={form} onChange={textChange}>{schema}</textarea>
+            <Row>
+              <Col>
+                <button className="btn btn-large btn-secondary create-btn" onClick={() => onClickCheck(1)} active={cSelected.includes(1)}>Check</button>
+              </Col>
+              <Col>
+                <button className="btn btn-large btn-secondary create-btn" onClick={onClickCreate}>Create</button>
+              </Col>
+            </Row>
           </div>
-        </div>
         <div className="new-form">
           {clicked?
             <form>
@@ -90,7 +118,7 @@ function Main() {
           :null}  
         </div> 
       </div>
-    </div>
+    </div>  
     </FormContext.Provider>
   );
 }
