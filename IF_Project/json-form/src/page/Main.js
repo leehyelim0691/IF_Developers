@@ -22,14 +22,16 @@ function Main() {
 
   useEffect(() => {
     setJson(jsonSkeleton);
-  })
+  },[])
   
   const textChange = (e) => {
     setForm(e.target.value);
   }
 
+
   const onClickCreate = () => {
     var schema = document.getElementById('json-editor').value;
+    console.log(schema);
     var myobj=JSON.parse(schema);
     setElements(myobj);
     setClicked(true);

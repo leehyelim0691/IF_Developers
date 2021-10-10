@@ -22,21 +22,77 @@
       "field_type": "checkbox"
   },
   {
-      "field_id": "",
-      "field_label": "",
-      "field_value": "",
-      "field_type": "color"
-  },
+    "field_id": "",
+    "field_label": "",
+    "field_mandatory": "",
+    "field_placeholder": "",
+    "field_value": "",
+    "field_type": "email"
+},
   {
-      "field_id": "",
-      "field_label": "",
-      "field_value": "",
-      "field_type": "search"
-  },
-  {
-      "field_id": "",
-      "field_label": "",
-      "field_value": "",
-      "field_type": "email"
-  }
+    "field_id": "",
+    "field_label": "",
+    "field_value": "",
+    "field_type": "color"
+},
+{
+    "field_id": "",
+    "field_label": "",
+    "field_mandatory": "",
+    "field_value": "",
+    "field_min": "",
+    "filed_max": "",
+    "field_type": "date"
+},
+{
+    "field_id": "",
+    "field_label": "",
+    "field_mandatory": "",
+    "field_value": "",
+    "field_min": "",
+    "filed_max": "",
+    "field_type": "datetime-local"
+},
+{
+    "field_id": "",
+    "field_label": "",
+    "field_mandatory": "",
+    "field_value": "",
+    "field_min": "",
+    "filed_max": "",
+    "field_type": "month"
+},
+{
+    "field_id": "",
+    "field_label": "",
+    "field_mandatory": "",
+    "field_type": "file"
+},
+{
+    "field_id": "",
+    "field_label": " ",
+    "field_mandatory": "",
+    "field_value": "",
+    "field_min": "",
+    "filed_max": "",
+    "field_type": "number"
+},
+{
+    "field_id": "",
+    "field_label": "",
+    "field_mandatory": "",
+    "field_placeholder": "",
+    "field_value": "",
+    "pattern=":"",
+    "field_type": "tel"
+},
+{
+    "field_id": "",
+    "field_label": "",
+    "field_mandatory": "",
+    "field_value": "",
+    "field_min": "",
+    "filed_max": "",
+    "field_type": "range"
+}
 ]
