@@ -24,16 +24,16 @@
   {
     "field_id": "",
     "field_label": "",
+    "field_value": "",
+    "field_type": "color"
+},
+{
+    "field_id": "",
+    "field_label": "",
     "field_mandatory": "",
     "field_placeholder": "",
     "field_value": "",
     "field_type": "email"
-},
-  {
-    "field_id": "",
-    "field_label": "",
-    "field_value": "",
-    "field_type": "color"
 },
 {
     "field_id": "",

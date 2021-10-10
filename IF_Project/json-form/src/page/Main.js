@@ -93,8 +93,14 @@ function Main() {
               <Button outline color="warning" onClick={() =>addJson(1)} active={rSelected === 1}>Select</Button>{' '}
               <Button outline color="success" onClick={() =>addJson(2)} active={rSelected === 2}>Checkbox</Button>{' '}
               <Button outline color="info" onClick={() =>addJson(3)} active={rSelected === 3}>Color</Button>{' '}
-              <Button outline color="primary" onClick={() =>addJson(4)} active={rSelected === 4}>Search</Button>{' '}
-              <Button outline color="secondary" onClick={() =>addJson(5)} active={rSelected === 5}>Email</Button>{' '}
+              <Button outline color="primary" onClick={() =>addJson(4)} active={rSelected === 4}>Email</Button>{' '}
+              <Button outline color="secondary" onClick={() =>addJson(5)} active={rSelected === 5}>Date</Button>{' '}
+              <Button outline color="secondary" onClick={() =>addJson(6)} active={rSelected === 6}>Datetime</Button>{' '}
+              <Button outline color="secondary" onClick={() =>addJson(7)} active={rSelected === 7}>Month</Button>{' '}
+              <Button outline color="secondary" onClick={() =>addJson(8)} active={rSelected === 8}>File</Button>{' '}
+              <Button outline color="secondary" onClick={() =>addJson(9)} active={rSelected === 9}>Number</Button>{' '}
+              <Button outline color="secondary" onClick={() =>addJson(10)} active={rSelected === 10}>Telephone</Button>{' '}
+              <Button outline color="secondary" onClick={() =>addJson(11)} active={rSelected === 11}>Range</Button>{' '}
               <hr/>
             </Form>
         </FormGroup>
