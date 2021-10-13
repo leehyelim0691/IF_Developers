@@ -12,7 +12,7 @@ function Main() {
   const [elements, setElements] = useState(null);
   // const [form, setForm] = useState('{\n"page_label": "이력서 Form",\
   // "fields": [{}');
-  const [form, setForm] = useState('[\n"page_label": "이력서 Form",\n"fields": [\n');
+  const [form, setForm] = useState('{\n"page_label": "이력서 Form",\n"fields": [\n');
   const [rSelected, setRSelected] = useState(null);
   const [cSelected, setCSelected] = useState([]);
   const [json, setJson] = useState(null);
