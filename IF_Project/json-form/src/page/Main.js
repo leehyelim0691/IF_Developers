@@ -29,6 +29,11 @@ function Main() {
   }
 
 
+  // const onCreate = () => {
+  //   setForm(form + "\n]}");
+  //   onCreate();
+  // };
+
   const onClickCreate = () => {
     var schema = document.getElementById('json-editor').value;
     console.log(schema);
@@ -49,6 +54,10 @@ function Main() {
     if(cSelected.length!=0){
       setForm(form + "\n]}");
     }
+  }
+
+  const onClickReset = () => {
+    setForm("");
   }
 
   const handleChange = (id, event) => {
@@ -111,10 +120,12 @@ function Main() {
             <textarea className="json-editor" id="json-editor" value={form} onChange={textChange}>{schema}</textarea>
             <Row>
               <Col>
+              <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickReset()}}>Reset</button>              </Col>
+              <Col>
                 <button className="btn btn-large btn-secondary create-btn" onClick={() => onClickCheck(1)} active={cSelected.includes(1)}>Check</button>
               </Col>
               <Col>
-                <button className="btn btn-large btn-secondary create-btn" onClick={onClickCreate}>Create</button>
+                <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickCreate()}}>Create</button>
               </Col>
             </Row>
           </div>
