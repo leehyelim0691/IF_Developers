@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { FormContext } from '../../FormContext';
-const Select = ({ field_id, field_label, field_placeholder, field_value, field_options }) => {
+const Select = ({ field_id, field_label, field_options }) => {
     const { handleChange } = useContext(FormContext)
 
     return (

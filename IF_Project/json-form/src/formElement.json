@@ -105,6 +105,29 @@
                 "field_min": "0",
                 "filed_max": "50",
                 "field_type": "range"
+            },
+            {
+                "field_id": "comment",
+                "field_label": "후기를 입력하세요",
+                "field_placeholder": "후기를 입력하세요",
+                "field_value": "",
+                "field_cols": "500",
+                "field_rows":"20",
+                "field_maxlength": "1000",
+                "field_type": "textarea"
+            },
+            {
+                "field_id": "submint button",
+                "field_label": "Submit",
+                "field_value": "",
+                "field_type": "button"
+            },
+            {
+                "field_id": "radio",
+                "field_label": "성별을 선택하세요",
+                "field_value": "sex",
+                "field_options": [{"option_label":"남자"},{"option_label":"여자"}],
+                "field_type": "radio"
             }
         ]
     }
