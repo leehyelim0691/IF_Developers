@@ -5,6 +5,7 @@ const Select = ({ field_id, field_label, field_options }) => {
 
     return (
         <>
+        <div className="mb-3">
             <label className="form-label">{field_label}</label>
             <select className="form-select" aria-label="Default select example"
                 onChange={event => handleChange(field_id, event)}
@@ -15,6 +16,7 @@ const Select = ({ field_id, field_label, field_options }) => {
 
                 )}
             </select>
+        </div>
         </>
     )
 }

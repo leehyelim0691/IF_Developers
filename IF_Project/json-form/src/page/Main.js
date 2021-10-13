@@ -111,8 +111,8 @@ function Main() {
               <Button outline color="secondary" onClick={() =>addJson(10)} active={rSelected === 10}>Telephone</Button>{' '}
               <Button outline color="secondary" onClick={() =>addJson(11)} active={rSelected === 11}>Range</Button>{' '}
               <Button outline color="secondary" onClick={() =>addJson(12)} active={rSelected === 12}>Textarea</Button>{' '}
-              <Button outline color="secondary" onClick={() =>addJson(13)} active={rSelected === 13}>Button</Button>{' '}
-              <Button outline color="secondary" onClick={() =>addJson(14)} active={rSelected === 14}>Radio</Button>{' '}
+              <Button outline color="secondary" onClick={() =>addJson(13)} active={rSelected === 13}>Radio</Button>{' '}
+              <Button outline color="secondary" onClick={() =>addJson(14)} active={rSelected === 14}>Button</Button>{' '}
               <hr/>
             </Form>
         </FormGroup>

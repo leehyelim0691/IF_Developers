@@ -109,13 +109,13 @@
     "field_id": "",
     "field_label": "",
     "field_value": "",
-    "field_type": "button"
+    "field_options": [{"option_label":""}],
+    "field_type": "radio"
 },
 {
     "field_id": "",
     "field_label": "",
     "field_value": "",
-    "field_options": [{"option_label":""}],
-    "field_type": "radio"
+    "field_type": "button"
 }
 ]

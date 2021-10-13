@@ -1,4 +1,4 @@
-[
+
     {
         "page_label": "이력서 Form",
         "fields": [
@@ -94,7 +94,7 @@
                 "field_mandatory": "yes",
                 "field_placeholder": "010-1234-5678",
                 "field_value": "",
-                "pattern=":"[0-9]{3}-[0-9]{4}-[0-9]{4}",
+                "field_pattern":"[0-9]{3}-[0-9]{4}-[0-9]{4}",
                 "field_type": "tel"
             },
             {
@@ -112,15 +112,9 @@
                 "field_placeholder": "후기를 입력하세요",
                 "field_value": "",
                 "field_cols": "500",
-                "field_rows":"20",
+                "field_rows":"10",
                 "field_maxlength": "1000",
                 "field_type": "textarea"
-            },
-            {
-                "field_id": "submint button",
-                "field_label": "Submit",
-                "field_value": "",
-                "field_type": "button"
             },
             {
                 "field_id": "radio",
@@ -128,7 +122,12 @@
                 "field_value": "sex",
                 "field_options": [{"option_label":"남자"},{"option_label":"여자"}],
                 "field_type": "radio"
+            }, 
+            {
+                "field_id": "submint button",
+                "field_label": "Submit",
+                "field_value": "",
+                "field_type": "button"
             }
         ]
     }
-]
