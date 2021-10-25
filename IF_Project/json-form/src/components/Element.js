@@ -11,9 +11,11 @@ import File from './elements/File';
 import Number from './elements/Number';
 import Telephone from './elements/Telephone';
 import Range from './elements/Range';
-//import Radio from './elements/Radio';
+import Textarea from './elements/Textarea';
+import Button from './elements/Button';
+import Radio from './elements/Radio';
 
-const Element = ({ field: { field_type, field_id, field_label, field_placeholder, field_value, field_options, field_min, field_max, field_pattern } }) => {
+const Element = ({ field: { field_type, field_id, field_label, field_placeholder, field_value, field_options, field_min, field_max, field_pattern, field_cols,field_rows, field_maxlength } }) => {
 
     switch (field_type) {
         case 'text':
@@ -97,7 +99,7 @@ const Element = ({ field: { field_type, field_id, field_label, field_placeholder
                 field_label={field_label}
                 field_value={field_value}
                 field_placeholder={field_placeholder}
-                filed_pattern={field_pattern}
+                field_pattern={field_pattern}
                 
             />)
         case 'range':
@@ -108,14 +110,30 @@ const Element = ({ field: { field_type, field_id, field_label, field_placeholder
                 field_min = {field_min}
                 field_max = {field_max}                    
             />)
+        case 'textarea':
+            return (<Textarea
+                field_id={field_id}
+                field_label={field_label}
+                field_value={field_value}
+                field_placeholder={field_placeholder}
+                field_cols = {field_cols}
+                field_rows = {field_rows} 
+                field_maxlength = {field_maxlength}                      
+            />)
+        case 'button':
+            return (<Button
+                field_id={field_id}
+                field_label={field_label}
+                field_value={field_value}                    
+            />)
 
-        // case 'radio':
-        //     return (<Radio
-        //         field_id={field_id}
-        //         field_label={field_label}
-        //         field_values = {field_values}
-        //         field_value={field_value}
-        //     />)
+        case 'radio':
+            return (<Radio
+                field_id={field_id}
+                field_label={field_label}
+                field_value = {field_value}
+                field_options={field_options}
+            />)
         default:
             return null;
     }
