@@ -29,8 +29,10 @@ function Main() {
   }
 
   const onClickCreate = () => {
-    var schema = document.getElementById('jsonEditor').value+"\n]}";
-    setForm(form + "\n]}");
+    // var schema = document.getElementById('jsonEditor').value+"\n]}";
+    var schema = document.getElementById('json-editor').value;
+
+    // setForm(form + "\n]}");
     console.log(schema);
     var myobj=JSON.parse(schema);
     setElements(myobj);
@@ -70,10 +72,11 @@ function Main() {
       // setForm(form); 
       var txtArea =  document.getElementById('json-editor');
       var txtValue = txtArea.value;
-      var selectPos = txtArea.selectionStart; // 커서 위치 지정
+      var selectPos = txtValue.length-2; // 커서 위치 지정
+      // selectPos = 
       var beforeTxt = txtValue.substring(0, selectPos);  // 기존텍스트 ~ 커서시작점 까지의 문자
-      var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length);   // 커서끝지점 ~ 기존텍스트 까지의 문자
-      var addTxt = JSON.stringify(json[e],null, 4); // 추가 입력 할 텍스트
+      var afterTxt = txtValue.substring(txtArea.selectionEnd+txtValue.length-2, txtValue.length);   // 커서끝지점 ~ 기존텍스트 까지의 문자
+      var addTxt = JSON.stringify(json[e],null, 4) + '\n'; // 추가 입력 할 텍스트
 
       setForm(beforeTxt + addTxt + afterTxt);
       txtArea.value = beforeTxt + addTxt + afterTxt;
@@ -89,13 +92,13 @@ function Main() {
       var selectPos = txtArea.selectionStart; // 커서 위치 지정
       var beforeTxt = txtValue.substring(0, selectPos);  // 기존텍스트 ~ 커서시작점 까지의 문자
       var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length);   // 커서끝지점 ~ 기존텍스트 까지의 문자
-      var addTxt = ',' + JSON.stringify(json[e],null, 4); // 추가 입력 할 텍스트
+      var addTxt = ',' + JSON.stringify(json[e],null, 4)+ '\n'; // 추가 입력 할 텍스트
 
       setForm(beforeTxt + addTxt + afterTxt);
       txtArea.value = beforeTxt + addTxt + afterTxt;
 
       selectPos = selectPos + addTxt.length;
-      txtArea.selectionStart = selectPos; // 커서 시작점을 추가 삽입된 텍스트 이후로 지정
+      // txtArea.selectionStart = selectPos; // 커서 시작점을 추가 삽입된 텍스트 이후로 지정
       txtArea.selectionEnd = selectPos; // 커서 끝지점을 추가 삽입된 텍스트 이후로 지정
       // 'json-editor'.focus();
     }
