@@ -1,7 +1,7 @@
 import '../css/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Button, Form, FormGroup, Label, Col, Row} from 'reactstrap';
-import React,{useState,useEffect} from 'react';
+import React,{ useState, useEffect, useRef} from 'react';
 import Element from '../components/Element';
 import { FormContext } from '../FormContext';
 import jsonSkeleton from '../components/elements/jsonSkeleton.json';
@@ -10,9 +10,8 @@ function Main() {
   const [clicked, setClicked] = useState(false);
   const [schema,setSchema] = useState();
   const [elements, setElements] = useState(null);
-  // const [form, setForm] = useState('{\n"page_label": "이력서 Form",\
-  // "fields": [{}');
-  const [form, setForm] = useState('{\n"page_label": "이력서 Form",\n"fields": [\n');
+  const id = 0;
+  const [form, setForm] = useState('{\n"page_label": "이력서 Form",\n"fields": [\n ]}');
   const [rSelected, setRSelected] = useState(null);
   const [cSelected, setCSelected] = useState([]);
   const [json, setJson] = useState(null);
@@ -28,36 +27,18 @@ function Main() {
     setForm(e.target.value);
   }
 
-
-  // const onCreate = () => {
-  //   setForm(form + "\n]}");
-  //   onCreate();
-  // };
-
   const onClickCreate = () => {
-    var schema = document.getElementById('json-editor').value;
+    var schema = document.getElementById('json-editor').value+"\n]}";
+    setForm(form + "\n]}");
     console.log(schema);
     var myobj=JSON.parse(schema);
     setElements(myobj);
     setClicked(true);
   };
 
-  const onClickCheck = (selected) => {
-    const index = cSelected.indexOf(selected);
-    if (index < 0) {
-      cSelected.push(selected);
-    } else {
-      cSelected.splice(index, 1);
-    }
-    setCSelected([...cSelected]);
-
-    if(cSelected.length!=0){
-      setForm(form + "\n]}");
-    }
-  }
 
   const onClickReset = () => {
-    setForm("");
+    setForm('{\n"page_label": "이력서 Form",\n"fields": [\n ]}');
   }
 
   const handleChange = (id, event) => {
@@ -123,9 +104,7 @@ function Main() {
             <textarea className="json-editor" id="json-editor" value={form} onChange={textChange}>{schema}</textarea>
             <Row>
               <Col>
-              <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickReset()}}>Reset</button>              </Col>
-              <Col>
-                <button className="btn btn-large btn-secondary create-btn" onClick={() => onClickCheck(1)} active={cSelected.includes(1)}>Check</button>
+              <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickReset()}}>Reset</button>              
               </Col>
               <Col>
                 <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickCreate()}}>Create</button>
@@ -133,6 +112,7 @@ function Main() {
             </Row>
           </div>
         <div className="new-form">
+          <h3>{page_label}</h3>
           {clicked?
             <form>
               {fields ? fields.map((field, i) => <Element key={i} field={field} />) : null}
