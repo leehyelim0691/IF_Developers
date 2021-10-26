@@ -29,6 +29,7 @@ function Main() {
     setForm(e.target.value);
   }
 
+
   const onClickCreate = () => {
     var schema = document.getElementById('json-editor').value;
     console.log(schema);
@@ -55,28 +56,30 @@ function Main() {
     setForm("");
   }
 
-  // const onClickSave = (e) => {
-  //   const fileData = JSON.stringify(form);
-  //   const blob = new Blob([fileData], {type: "text/plain"});
-  //   const url = URL.createObjectURL(blob);
-  //   const link = document.createElement('a');
-  //   link.download = `newSchema.json`;
-  //   link.href = url;
-  //   link.click();
-  // }
+  const onClickSave = () => {
+    console.log(form);
+    var data=JSON.parse(form);
+    console.log(data);
+    axios.post('http://localhost:3000/Form1',data)
+    //성공시 then 실행
+    .then(function (response) {
+      console.log(response);
+      alert("데이터를 저장하였습니다.");
+    })
+    //실패 시 catch 실행
+    .catch(function (error) {
+      console.log(error);
+    });
+  };
 
-  const api = axios.create({
-    baseURL:`http://localhost:3000/posts`
-  })
-
-  const onClickSave = (e) => {
-    const url = 'http://localhost:3000/posts';
-    const formData = new FormData();
-    formData.append("data", new Blob([JSON.stringify(form)], {type: "application/json"}))
-    
-    api.post(url, formData);
-  }
-
+  const onClickDownload = () => {
+    const element = document.createElement("a");
+    const file = new Blob([document.getElementById('json-editor').value], {type: 'text/plain'});
+    element.href = URL.createObjectURL(file);
+    element.download = "myJson.txt";
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+  };
 
   const handleChange = (id, event) => {
     const newElements = { ...elements }
@@ -128,6 +131,9 @@ function Main() {
               <Button outline color="secondary" onClick={() =>addJson(9)} active={rSelected === 9}>Number</Button>{' '}
               <Button outline color="secondary" onClick={() =>addJson(10)} active={rSelected === 10}>Telephone</Button>{' '}
               <Button outline color="secondary" onClick={() =>addJson(11)} active={rSelected === 11}>Range</Button>{' '}
+              <Button outline color="secondary" onClick={() =>addJson(12)} active={rSelected === 12}>Textarea</Button>{' '}
+              <Button outline color="secondary" onClick={() =>addJson(13)} active={rSelected === 13}>Radio</Button>{' '}
+              <Button outline color="secondary" onClick={() =>addJson(14)} active={rSelected === 14}>Button</Button>{' '}
               <hr/>
             </Form>
         </FormGroup>
@@ -145,20 +151,24 @@ function Main() {
               <Col>
                 <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickCreate()}}>Create</button>
               </Col>
+              <Col>
+                <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickSave()}}>Save</button>
+              </Col>
+              <Col>
+              <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickDownload()}}>Download</button>
+              </Col> 
             </Row>
-        </div>
-        <div className="form-box">
-          <div className="new-form">
-            {clicked?
-              <form>
-                {fields ? fields.map((field, i) => <Element key={i} field={field} />) : null}
-              </form>
-            :null}  
           </div>
-          <div className="save-btn-container">
-            <button className="btn btn-large btn-secondary save-btn" onClick={onClickSave}>Save</button>
-          </div>
+        <div className="new-form">
+          {clicked?
+            <form>
+              {fields ? fields.map((field, i) => <Element key={i} field={field} />) : null}
+ 
+            </form>
+          :null}
+           
         </div>
+        
       </div>
     </div>  
     </FormContext.Provider>

@@ -1,10 +1,11 @@
 import React, { useContext } from 'react'
 import { FormContext } from '../../FormContext';
-const Select = ({ field_id, field_label, field_placeholder, field_value, field_options }) => {
+const Select = ({ field_id, field_label, field_options }) => {
     const { handleChange } = useContext(FormContext)
 
     return (
         <>
+        <div className="mb-3">
             <label className="form-label">{field_label}</label>
             <select className="form-select" aria-label="Default select example"
                 onChange={event => handleChange(field_id, event)}
@@ -15,6 +16,7 @@ const Select = ({ field_id, field_label, field_placeholder, field_value, field_o
 
                 )}
             </select>
+        </div>
         </>
     )
 }

@@ -83,7 +83,7 @@
     "field_mandatory": "",
     "field_placeholder": "",
     "field_value": "",
-    "pattern=":"",
+    "field_pattern":"",
     "field_type": "tel"
 },
 {
@@ -94,5 +94,28 @@
     "field_min": "",
     "filed_max": "",
     "field_type": "range"
+},
+{
+    "field_id": "",
+    "field_label": "",
+    "field_placeholder": "",
+    "field_value": "",
+    "field_cols": "",
+    "field_rows":"",
+    "field_maxlength": "",
+    "field_type": "textarea"
+},
+{
+    "field_id": "",
+    "field_label": "",
+    "field_value": "",
+    "field_options": [{"option_label":""}],
+    "field_type": "radio"
+},
+{
+    "field_id": "",
+    "field_label": "",
+    "field_value": "",
+    "field_type": "button"
 }
 ]
