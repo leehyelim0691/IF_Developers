@@ -13,9 +13,10 @@ function Main() {
   const id = 0;
   const [form, setForm] = useState('{\n"page_label": "이력서 Form",\n"fields": [\n ]}');
   const [rSelected, setRSelected] = useState(null);
-  const [cSelected, setCSelected] = useState([]);
   const [json, setJson] = useState(null);
   const [count, setCount] = useState(0);
+  const resetInput = useRef();
+
   
   const { fields, page_label } = elements ?? {}
 
@@ -28,7 +29,7 @@ function Main() {
   }
 
   const onClickCreate = () => {
-    var schema = document.getElementById('json-editor').value+"\n]}";
+    var schema = document.getElementById('jsonEditor').value+"\n]}";
     setForm(form + "\n]}");
     console.log(schema);
     var myobj=JSON.parse(schema);
@@ -39,7 +40,8 @@ function Main() {
 
   const onClickReset = () => {
     setForm('{\n"page_label": "이력서 Form",\n"fields": [\n ]}');
-  }
+    resetInput.current.focus();
+  };
 
   const handleChange = (id, event) => {
     const newElements = { ...elements }
@@ -63,11 +65,39 @@ function Main() {
 
   const addJson = e => {
     setRSelected(e); 
+
     if(count == 0){
-      setForm(form + JSON.stringify(json[e],null, 4));
+      // setForm(form); 
+      var txtArea =  document.getElementById('json-editor');
+      var txtValue = txtArea.value;
+      var selectPos = txtArea.selectionStart; // 커서 위치 지정
+      var beforeTxt = txtValue.substring(0, selectPos);  // 기존텍스트 ~ 커서시작점 까지의 문자
+      var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length);   // 커서끝지점 ~ 기존텍스트 까지의 문자
+      var addTxt = JSON.stringify(json[e],null, 4); // 추가 입력 할 텍스트
+
+      setForm(beforeTxt + addTxt + afterTxt);
+      txtArea.value = beforeTxt + addTxt + afterTxt;
+
+      selectPos = selectPos + addTxt.length;
+      // txtArea.selectionStart = selectPos; // 커서 시작점을 추가 삽입된 텍스트 이후로 지정
+      txtArea.selectionEnd = selectPos; // 커서 끝지점을 추가 삽입된 텍스트 이후로 지정
+      // 'json-editor'.focus();
     }
     else{
-      setForm(form+","+JSON.stringify(json[e],null, 4));
+      var txtArea =  document.getElementById('json-editor');
+      var txtValue = txtArea.value;
+      var selectPos = txtArea.selectionStart; // 커서 위치 지정
+      var beforeTxt = txtValue.substring(0, selectPos);  // 기존텍스트 ~ 커서시작점 까지의 문자
+      var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length);   // 커서끝지점 ~ 기존텍스트 까지의 문자
+      var addTxt = ',' + JSON.stringify(json[e],null, 4); // 추가 입력 할 텍스트
+
+      setForm(beforeTxt + addTxt + afterTxt);
+      txtArea.value = beforeTxt + addTxt + afterTxt;
+
+      selectPos = selectPos + addTxt.length;
+      txtArea.selectionStart = selectPos; // 커서 시작점을 추가 삽입된 텍스트 이후로 지정
+      txtArea.selectionEnd = selectPos; // 커서 끝지점을 추가 삽입된 텍스트 이후로 지정
+      // 'json-editor'.focus();
     }
     setCount(count+1);
   }
@@ -101,6 +131,7 @@ function Main() {
       <div className="editor-container">
         <div className="editor-box" >
           <div className="editor-head"><h5>JSONSchema</h5></div> 
+            {/* <textarea className="json-editor" id="json-editor" value={form} onChange={textChange}>{schema}</textarea> */}
             <textarea className="json-editor" id="json-editor" value={form} onChange={textChange}>{schema}</textarea>
             <Row>
               <Col>
@@ -118,6 +149,9 @@ function Main() {
               {fields ? fields.map((field, i) => <Element key={i} field={field} />) : null}
             </form>
           :null}  
+           <input
+        type="text"
+        ref={resetInput} />
         </div> 
       </div>
     </div>  
