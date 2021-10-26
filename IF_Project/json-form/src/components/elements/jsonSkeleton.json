@@ -6,7 +6,9 @@
       "field_placeholder": "",
       "field_type": "text",
       "field_value": ""
-  },
+  }
+  ,
+
   {
       "field_id": "",
       "field_label": "",
@@ -15,12 +17,14 @@
       "field_options": [{"option_label":""}],
       "field_type": "select"
   },
+
   {
       "field_id": "",
       "field_label": "",
       "field_value": "",
       "field_type": "checkbox"
   },
+
   {
     "field_id": "",
     "field_label": "",

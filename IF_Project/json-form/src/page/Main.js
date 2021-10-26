@@ -1,7 +1,7 @@
 import '../css/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Button, Form, FormGroup, Label, Col, Row} from 'reactstrap';
-import React,{useState,useEffect} from 'react';
+import React,{ useState, useEffect, useRef} from 'react';
 import Element from '../components/Element';
 import { FormContext } from '../FormContext';
 import jsonSkeleton from '../components/elements/jsonSkeleton.json';
@@ -10,13 +10,13 @@ function Main() {
   const [clicked, setClicked] = useState(false);
   const [schema,setSchema] = useState();
   const [elements, setElements] = useState(null);
-  // const [form, setForm] = useState('{\n"page_label": "이력서 Form",\
-  // "fields": [{}');
-  const [form, setForm] = useState('{\n"page_label": "이력서 Form",\n"fields": [\n');
+  const id = 0;
+  const [form, setForm] = useState('{\n"page_label": "이력서 Form",\n"fields": [\n ]}');
   const [rSelected, setRSelected] = useState(null);
-  const [cSelected, setCSelected] = useState([]);
   const [json, setJson] = useState(null);
   const [count, setCount] = useState(0);
+  const resetInput = useRef();
+
   
   const { fields, page_label } = elements ?? {}
 
@@ -28,37 +28,22 @@ function Main() {
     setForm(e.target.value);
   }
 
-
-  // const onCreate = () => {
-  //   setForm(form + "\n]}");
-  //   onCreate();
-  // };
-
   const onClickCreate = () => {
+    // var schema = document.getElementById('jsonEditor').value+"\n]}";
     var schema = document.getElementById('json-editor').value;
+
+    // setForm(form + "\n]}");
     console.log(schema);
     var myobj=JSON.parse(schema);
     setElements(myobj);
     setClicked(true);
   };
 
-  const onClickCheck = (selected) => {
-    const index = cSelected.indexOf(selected);
-    if (index < 0) {
-      cSelected.push(selected);
-    } else {
-      cSelected.splice(index, 1);
-    }
-    setCSelected([...cSelected]);
-
-    if(cSelected.length!=0){
-      setForm(form + "\n]}");
-    }
-  }
 
   const onClickReset = () => {
-    setForm("");
-  }
+    setForm('{\n"page_label": "이력서 Form",\n"fields": [\n ]}');
+    resetInput.current.focus();
+  };
 
   const handleChange = (id, event) => {
     const newElements = { ...elements }
@@ -82,11 +67,40 @@ function Main() {
 
   const addJson = e => {
     setRSelected(e); 
+
     if(count == 0){
-      setForm(form + JSON.stringify(json[e],null, 4));
+      // setForm(form); 
+      var txtArea =  document.getElementById('json-editor');
+      var txtValue = txtArea.value;
+      var selectPos = txtValue.length-2; // 커서 위치 지정
+      // selectPos = 
+      var beforeTxt = txtValue.substring(0, selectPos);  // 기존텍스트 ~ 커서시작점 까지의 문자
+      var afterTxt = txtValue.substring(txtArea.selectionEnd+txtValue.length-2, txtValue.length);   // 커서끝지점 ~ 기존텍스트 까지의 문자
+      var addTxt = JSON.stringify(json[e],null, 4) + '\n'; // 추가 입력 할 텍스트
+
+      setForm(beforeTxt + addTxt + afterTxt);
+      txtArea.value = beforeTxt + addTxt + afterTxt;
+
+      selectPos = selectPos + addTxt.length;
+      // txtArea.selectionStart = selectPos; // 커서 시작점을 추가 삽입된 텍스트 이후로 지정
+      txtArea.selectionEnd = selectPos; // 커서 끝지점을 추가 삽입된 텍스트 이후로 지정
+      // 'json-editor'.focus();
     }
     else{
-      setForm(form+","+JSON.stringify(json[e],null, 4));
+      var txtArea =  document.getElementById('json-editor');
+      var txtValue = txtArea.value;
+      var selectPos = txtArea.selectionStart; // 커서 위치 지정
+      var beforeTxt = txtValue.substring(0, selectPos);  // 기존텍스트 ~ 커서시작점 까지의 문자
+      var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length);   // 커서끝지점 ~ 기존텍스트 까지의 문자
+      var addTxt = ',' + JSON.stringify(json[e],null, 4)+ '\n'; // 추가 입력 할 텍스트
+
+      setForm(beforeTxt + addTxt + afterTxt);
+      txtArea.value = beforeTxt + addTxt + afterTxt;
+
+      selectPos = selectPos + addTxt.length;
+      // txtArea.selectionStart = selectPos; // 커서 시작점을 추가 삽입된 텍스트 이후로 지정
+      txtArea.selectionEnd = selectPos; // 커서 끝지점을 추가 삽입된 텍스트 이후로 지정
+      // 'json-editor'.focus();
     }
     setCount(count+1);
   }
@@ -120,12 +134,11 @@ function Main() {
       <div className="editor-container">
         <div className="editor-box" >
           <div className="editor-head"><h5>JSONSchema</h5></div> 
+            {/* <textarea className="json-editor" id="json-editor" value={form} onChange={textChange}>{schema}</textarea> */}
             <textarea className="json-editor" id="json-editor" value={form} onChange={textChange}>{schema}</textarea>
             <Row>
               <Col>
-              <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickReset()}}>Reset</button>              </Col>
-              <Col>
-                <button className="btn btn-large btn-secondary create-btn" onClick={() => onClickCheck(1)} active={cSelected.includes(1)}>Check</button>
+              <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickReset()}}>Reset</button>              
               </Col>
               <Col>
                 <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickCreate()}}>Create</button>
@@ -133,11 +146,15 @@ function Main() {
             </Row>
           </div>
         <div className="new-form">
+          <h3>{page_label}</h3>
           {clicked?
             <form>
               {fields ? fields.map((field, i) => <Element key={i} field={field} />) : null}
             </form>
           :null}  
+           <input
+        type="text"
+        ref={resetInput} />
         </div> 
       </div>
     </div>  

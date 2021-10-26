@@ -1,7 +1,7 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
 import { FormContext } from '../../FormContext';
 
-const Input = ({ field_id, field_label, field_placeholder, field_value }) => {
+const Input = ({ field_id, field_label, field_placeholder, field_value, input }) => {
     const { handleChange } = useContext(FormContext)
     return (
         <div className="mb-3">
@@ -10,6 +10,7 @@ const Input = ({ field_id, field_label, field_placeholder, field_value }) => {
                 placeholder={field_placeholder ? field_placeholder : ''}
                 value={field_value}
                 onChange={event => handleChange(field_id, event)}
+                ref={input}
             />
         </div>
     )
