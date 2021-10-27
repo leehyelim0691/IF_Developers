@@ -9,10 +9,10 @@
       "page_label": "로그인 Form",
       "fields": [
         {
-          "field_id": "",
-          "field_label": "",
-          "field_value": "",
-          "field_type": "checkbox"
+          "id": "",
+          "label": "",
+          "value": "",
+          "type": "checkbox"
         }
       ],
       "id": 2

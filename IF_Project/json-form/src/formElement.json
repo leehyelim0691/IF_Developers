@@ -3,19 +3,19 @@
         "page_label": "이력서 Form",
         "fields": [
             {
-                "field_id": "english_name",
-                "field_label": "이름",
-                "field_mandatory": "yes",
-                "field_placeholder": "이름을 입력하세요",
-                "field_type": "text",
-                "field_value": ""
+                "id": "english_name",
+                "label": "이름",
+                "mandatory": "yes",
+                "placeholder": "이름을 입력하세요",
+                "type": "text",
+                "value": ""
             },
             {
-                "field_id": "employment",
-                "field_label": "종류",
-                "field_value": "Part-Time",
-                "field_mandatory": "yes",
-                "field_options": [
+                "id": "employment",
+                "label": "종류",
+                "value": "Part-Time",
+                "mandatory": "yes",
+                "options": [
                     {
                         "option_label": "정직원"
                     },
@@ -23,111 +23,111 @@
                         "option_label": "알바"
                     }
                 ],
-                "field_type": "select"
+                "type": "select"
             },
             {
-                "field_id": "driving_license",
-                "field_label": "운전면허가 있습니다.",
-                "field_type": "checkbox",
-                "field_value": "checked"
+                "id": "driving_license",
+                "label": "운전면허가 있습니다.",
+                "type": "checkbox",
+                "value": "checked"
             },
             {
-                "field_id": "color",
-                "field_label": "좋아하는 색을 고르세요.",
-                "field_mandatory": "yes",
-                "field_value": "#ff0000",
-                "field_type": "color"
+                "id": "color",
+                "label": "좋아하는 색을 고르세요.",
+                "mandatory": "yes",
+                "value": "#ff0000",
+                "type": "color"
             },
             {
-                "field_id": "date",
-                "field_label": "생일을 입력하세요.",
-                "field_mandatory": "yes",
-                "field_value": "1999-04-22",
-                "field_min": "1950-01-01",
+                "id": "date",
+                "label": "생일을 입력하세요.",
+                "mandatory": "yes",
+                "value": "1999-04-22",
+                "min": "1950-01-01",
                 "filed_max": "2022-12-31",
-                "field_type": "date"
+                "type": "date"
             },
             {
-                "field_id": "datetime",
-                "field_label": "예약 시간을 정하세요.",
-                "field_mandatory": "yes",
-                "field_value": "",
-                "field_min": "",
+                "id": "datetime",
+                "label": "예약 시간을 정하세요.",
+                "mandatory": "yes",
+                "value": "",
+                "min": "",
                 "filed_max": "2022-12-31T00:00",
-                "field_type": "datetime-local"
+                "type": "datetime-local"
             },
             {
-                "field_id": "month",
-                "field_label": "휴가 갈 월을 선택하세요.",
-                "field_mandatory": "yes",
-                "field_value": "",
-                "field_min": "",
+                "id": "month",
+                "label": "휴가 갈 월을 선택하세요.",
+                "mandatory": "yes",
+                "value": "",
+                "min": "",
                 "filed_max": "2022-12",
-                "field_type": "month"
+                "type": "month"
             },
             {
-                "field_id": "email",
-                "field_label": "이메일을 입력하세요",
-                "field_mandatory": "yes",
-                "field_placeholder": "abc@example.com",
-                "field_value": "",
-                "field_type": "email"
+                "id": "email",
+                "label": "이메일을 입력하세요",
+                "mandatory": "yes",
+                "placeholder": "abc@example.com",
+                "value": "",
+                "type": "email"
             },
             {
-                "field_id": "file",
-                "field_label": "파일을 선택하세요",
-                "field_mandatory": "yes",
-                "field_type": "file"
+                "id": "file",
+                "label": "파일을 선택하세요",
+                "mandatory": "yes",
+                "type": "file"
             },
             {
-                "field_id": "quantity",
-                "field_label": "몇개를 주문하시겠습니까? ",
-                "field_mandatory": "yes",
-                "field_value": "",
-                "field_min": "1",
+                "id": "quantity",
+                "label": "몇개를 주문하시겠습니까? ",
+                "mandatory": "yes",
+                "value": "",
+                "min": "1",
                 "filed_max": "10",
-                "field_type": "number"
+                "type": "number"
             },
             {
-                "field_id": "telephone",
-                "field_label": "전화번호를 입력하세요",
-                "field_mandatory": "yes",
-                "field_placeholder": "010-1234-5678",
-                "field_value": "",
-                "field_pattern":"[0-9]{3}-[0-9]{4}-[0-9]{4}",
-                "field_type": "tel"
+                "id": "telephone",
+                "label": "전화번호를 입력하세요",
+                "mandatory": "yes",
+                "placeholder": "010-1234-5678",
+                "value": "",
+                "pattern":"[0-9]{3}-[0-9]{4}-[0-9]{4}",
+                "type": "tel"
             },
             {
-                "field_id": "range",
-                "field_label": "볼륨을 정하세요.",
-                "field_mandatory": "yes",
-                "field_value": "",
-                "field_min": "0",
+                "id": "range",
+                "label": "볼륨을 정하세요.",
+                "mandatory": "yes",
+                "value": "",
+                "min": "0",
                 "filed_max": "50",
-                "field_type": "range"
+                "type": "range"
             },
             {
-                "field_id": "comment",
-                "field_label": "후기를 입력하세요",
-                "field_placeholder": "후기를 입력하세요",
-                "field_value": "",
-                "field_cols": "500",
-                "field_rows":"10",
-                "field_maxlength": "1000",
-                "field_type": "textarea"
+                "id": "comment",
+                "label": "후기를 입력하세요",
+                "placeholder": "후기를 입력하세요",
+                "value": "",
+                "cols": "500",
+                "rows":"10",
+                "maxlength": "1000",
+                "type": "textarea"
             },
             {
-                "field_id": "radio",
-                "field_label": "성별을 선택하세요",
-                "field_value": "sex",
-                "field_options": [{"option_label":"남자"},{"option_label":"여자"}],
-                "field_type": "radio"
+                "id": "radio",
+                "label": "성별을 선택하세요",
+                "value": "sex",
+                "options": [{"option_label":"남자"},{"option_label":"여자"}],
+                "type": "radio"
             }, 
             {
-                "field_id": "submint button",
-                "field_label": "Submit",
-                "field_value": "",
-                "field_type": "button"
+                "id": "submint button",
+                "label": "Submit",
+                "value": "",
+                "type": "button"
             }
         ]
     }
