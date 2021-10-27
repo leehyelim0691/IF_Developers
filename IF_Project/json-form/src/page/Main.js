@@ -5,6 +5,7 @@ import React,{ useState, useEffect, useRef} from 'react';
 import Element from '../components/Element';
 import { FormContext } from '../FormContext';
 import jsonSkeleton from '../components/elements/jsonSkeleton.json';
+import axios from 'axios';
 
 function Main() {
   const [clicked, setClicked] = useState(false);
@@ -37,6 +38,32 @@ function Main() {
   const onClickReset = () => {
     setForm('{\n"page_label": "이력서 Form",\n"fields": [\n ]}');
     setCount(0);
+  };
+
+  const onClickSave = () => {
+    console.log(form);
+    var data=JSON.parse(form);
+    console.log(data);
+    axios.post('http://localhost:3000/Form',data)
+    //성공시 then 실행
+    .then(function (response) {
+      console.log(response);
+      alert("데이터를 저장하였습니다.");
+    })
+    //실패 시 catch 실행
+    .catch(function (error) {
+      console.log(error);
+    });
+  };
+
+  const onClickDownload = () => {
+    var formObj=JSON.parse(form);
+    const element = document.createElement("a");
+    const file = new Blob([document.getElementById('json-editor').value], {type: 'text/plain'});
+    element.href = URL.createObjectURL(file);
+    element.download = formObj.page_label+".txt";
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
   };
 
   const handleChange = (id, event) => {
@@ -140,14 +167,24 @@ function Main() {
               </Col>
             </Row>
           </div>
-        <div className="new-form">
-          <h3>{page_label}</h3>
-          {clicked?
-            <form>
-              {fields ? fields.map((field, i) => <Element key={i} field={field} />) : null}
-            </form>
-          :null}  
-        </div> 
+          <div className="form-box"> 
+            <div className="new-form">
+              <h3>{page_label}</h3>
+              {clicked?
+              <form>
+                {fields ? fields.map((field, i) => <Element key={i} field={field} />) : null}
+              </form>
+              :null}  
+            </div> 
+            <Row>
+              <Col>
+              <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickSave()}}>Save</button>              
+              </Col>
+              <Col>
+                <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickDownload()}}>Download</button>
+              </Col>
+            </Row>
+        </div>
       </div>
     </div>  
     </FormContext.Provider>
