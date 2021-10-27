@@ -172,7 +172,9 @@ function Main() {
               <h3>{page_label}</h3>
               {clicked?
               <form>
+                <Row>
                 {fields ? fields.map((field, i) => <Element key={i} field={field} />) : null}
+                </Row>
               </form>
               :null}  
             </div> 
