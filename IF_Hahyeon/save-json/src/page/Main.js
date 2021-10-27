@@ -1,7 +1,7 @@
 import '../css/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Button, Form, FormGroup, Label, Col, Row} from 'reactstrap';
-import React,{ useState, useEffect, useRef} from 'react';
+import React,{useState,useEffect} from 'react';
 import Element from '../components/Element';
 import { FormContext } from '../FormContext';
 import jsonSkeleton from '../components/elements/jsonSkeleton.json';
@@ -11,11 +11,14 @@ function Main() {
   const [clicked, setClicked] = useState(false);
   const [schema,setSchema] = useState();
   const [elements, setElements] = useState(null);
-  const id = 0;
-  const [form, setForm] = useState('{\n"page_label": "이력서 Form",\n"fields": [\n ]}');
+  // const [form, setForm] = useState('{\n"page_label": "이력서 Form",\
+  // "fields": [{}');
+  const [form, setForm] = useState('{\n"page_label": "이력서 Form",\n"fields": [\n');
   const [rSelected, setRSelected] = useState(null);
+  const [cSelected, setCSelected] = useState([]);
   const [json, setJson] = useState(null);
   const [count, setCount] = useState(0);
+  
   const { fields, page_label } = elements ?? {}
 
   useEffect(() => {
@@ -26,6 +29,7 @@ function Main() {
     setForm(e.target.value);
   }
 
+
   const onClickCreate = () => {
     var schema = document.getElementById('json-editor').value;
     console.log(schema);
@@ -34,17 +38,29 @@ function Main() {
     setClicked(true);
   };
 
+  const onClickCheck = (selected) => {
+    const index = cSelected.indexOf(selected);
+    if (index < 0) {
+      cSelected.push(selected);
+    } else {
+      cSelected.splice(index, 1);
+    }
+    setCSelected([...cSelected]);
+
+    if(cSelected.length!=0){
+      setForm(form + "\n]}");
+    }
+  }
 
   const onClickReset = () => {
-    setForm('{\n"page_label": "이력서 Form",\n"fields": [\n ]}');
-    setCount(0);
-  };
+    setForm("");
+  }
 
   const onClickSave = () => {
     console.log(form);
     var data=JSON.parse(form);
     console.log(data);
-    axios.post('http://localhost:3000/Form',data)
+    axios.post('http://localhost:3000/Form1',data)
     //성공시 then 실행
     .then(function (response) {
       console.log(response);
@@ -57,11 +73,10 @@ function Main() {
   };
 
   const onClickDownload = () => {
-    var formObj=JSON.parse(form);
     const element = document.createElement("a");
     const file = new Blob([document.getElementById('json-editor').value], {type: 'text/plain'});
     element.href = URL.createObjectURL(file);
-    element.download = formObj.page_label+".txt";
+    element.download = "myJson.txt";
     document.body.appendChild(element); // Required for this to work in FireFox
     element.click();
   };
@@ -88,42 +103,11 @@ function Main() {
 
   const addJson = e => {
     setRSelected(e); 
-
     if(count == 0){
-      var txtArea =  document.getElementById('json-editor');
-      var txtValue = txtArea.value;
-      var selectPos = txtValue.length-2;
-      var beforeTxt = txtValue.substring(0, selectPos);
-      var afterTxt = txtValue.substring(txtArea.selectionEnd+txtValue.length-2, txtValue.length); 
-      var addTxt = JSON.stringify(json[e],null, 4) + '\n'; 
-
-      setForm(beforeTxt + addTxt + afterTxt);
-      txtArea.value = beforeTxt + addTxt + afterTxt;
-      selectPos = selectPos + addTxt.length;
-      txtArea.selectionEnd = selectPos;
+      setForm(form + JSON.stringify(json[e],null, 4));
     }
     else{
-      var txtArea =  document.getElementById('json-editor');
-      var txtValue = txtArea.value;
-      var selectPos = txtArea.selectionStart; 
-      if(txtValue.substring(selectPos-1,selectPos)=='[' || txtValue.substring(selectPos-2,selectPos-1)=='['){
-        var beforeTxt = txtValue.substring(0, selectPos); 
-        var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length);  
-        var addTxt = '\n' + JSON.stringify(json[e],null, 4) + ',';
-        setForm(beforeTxt + addTxt + afterTxt);
-        txtArea.value = beforeTxt + addTxt + afterTxt;
-        selectPos = selectPos + addTxt.length;
-        txtArea.selectionEnd = selectPos; 
-      }
-      else{
-        var beforeTxt = txtValue.substring(0, selectPos);  
-        var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length);  
-        var addTxt = ',' + JSON.stringify(json[e],null, 4)+ '\n'; 
-        setForm(beforeTxt + addTxt + afterTxt);
-        txtArea.value = beforeTxt + addTxt + afterTxt;
-        selectPos = selectPos + addTxt.length;
-        txtArea.selectionEnd = selectPos; 
-      }
+      setForm(form+","+JSON.stringify(json[e],null, 4));
     }
     setCount(count+1);
   }
@@ -160,31 +144,31 @@ function Main() {
             <textarea className="json-editor" id="json-editor" value={form} onChange={textChange}>{schema}</textarea>
             <Row>
               <Col>
-              <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickReset()}}>Reset</button>              
+              <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickReset()}}>Reset</button>              </Col>
+              <Col>
+                <button className="btn btn-large btn-secondary create-btn" onClick={() => onClickCheck(1)} active={cSelected.includes(1)}>Check</button>
               </Col>
               <Col>
                 <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickCreate()}}>Create</button>
               </Col>
+              <Col>
+                <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickSave()}}>Save</button>
+              </Col>
+              <Col>
+              <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickDownload()}}>Download</button>
+              </Col> 
             </Row>
           </div>
-          <div className="form-box"> 
-            <div className="new-form">
-              <h3>{page_label}</h3>
-              {clicked?
-              <form>
-                {fields ? fields.map((field, i) => <Element key={i} field={field} />) : null}
-              </form>
-              :null}  
-            </div> 
-            <Row>
-              <Col>
-              <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickSave()}}>Save</button>              
-              </Col>
-              <Col>
-                <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickDownload()}}>Download</button>
-              </Col>
-            </Row>
+        <div className="new-form">
+          {clicked?
+            <form>
+              {fields ? fields.map((field, i) => <Element key={i} field={field} />) : null}
+ 
+            </form>
+          :null}
+           
         </div>
+        
       </div>
     </div>  
     </FormContext.Provider>

@@ -15,7 +15,7 @@ import Textarea from './elements/Textarea';
 import Button from './elements/Button';
 import Radio from './elements/Radio';
 
-const Element = ({ field: { field_type, field_id, field_label, field_placeholder, field_value, input, field_options, field_min, field_max, field_pattern, field_cols,field_rows, field_maxlength } }) => {
+const Element = ({ field: { field_type, field_id, field_label, field_placeholder, field_value, field_options, field_min, field_max, field_pattern, field_cols,field_rows, field_maxlength } }) => {
 
     switch (field_type) {
         case 'text':
@@ -24,7 +24,7 @@ const Element = ({ field: { field_type, field_id, field_label, field_placeholder
                 field_label={field_label}
                 field_placeholder={field_placeholder}
                 field_value={field_value}
-                ref={input}
+
             />)
         case 'select':
             return (<Select

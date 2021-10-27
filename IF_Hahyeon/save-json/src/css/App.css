@@ -18,17 +18,12 @@
   color:white;
   resize: none;
 }
-.form-box{
-  width: 100%;
-  margin-left:10px;
-}
 
 .new-form{
+  width: 100%;
   padding: 20px 40px;
   border:1px solid lightgray;
-  margin-top:35px;
-  margin-bottom: 10px;
-  height: 90%;
+  margin:35px 10px;
 }
 
 .editor-head{
