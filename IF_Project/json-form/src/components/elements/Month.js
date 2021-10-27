@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import { FormContext } from '../../FormContext';
 
-const Month = ({ id, label, value, min, max }) => {
+const Month = ({ id, label, value, min, max , width}) => {
     const { handleChange } = useContext(FormContext)
     return (
-        <div className="mb-3">
+        <div class={width ? 'mb-3 col-md-'+width : 'mb-3 col-md-4'}>
             <label htmlFor="Month" className="form-label">{label}</label>
             <input type="month" className="form-control" id="month" 
                 value = {value}

@@ -1,12 +1,13 @@
 import React, { useContext, useRef } from 'react'
 import { FormContext } from '../../FormContext';
 
-const Input = ({ id, label, placeholder, value, input }) => {
+const Input = ({ id, label, placeholder, value, input, width }) => {
     const { handleChange } = useContext(FormContext)
+    console.log(width)
     return (
-        <div className="mb-3">
-            <label htmlFor="exampleInputEmail1" className="form-label">{label}</label>
-            <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+        <div class={width ? 'mb-3 form-group col-md-'+width : 'mb-3 form-group col-md-6'}>
+            <label htmlFor="inputText" className="form-label">{label}</label>
+            <input type="text" className="form-control" id="input_text" aria-describedby="input"
                 placeholder={placeholder ? placeholder : ''}
                 value={value}
                 onChange={event => handleChange(id, event)}

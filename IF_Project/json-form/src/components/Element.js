@@ -15,7 +15,7 @@ import Textarea from './elements/Textarea';
 import Button from './elements/Button';
 import Radio from './elements/Radio';
 
-const Element = ({ field: { type, id, label, placeholder, value, input, options, min, max, pattern, cols,rows, maxlength } }) => {
+const Element = ({ field: { type, id, label, placeholder, value, input, options, min, max, pattern, cols,rows, maxlength, width } }) => {
 
     switch (type) {
         case 'text':
@@ -25,6 +25,7 @@ const Element = ({ field: { type, id, label, placeholder, value, input, options,
                 placeholder={placeholder}
                 value={value}
                 ref={input}
+                width = {width}
             />)
         case 'select':
             return (<Select
@@ -33,18 +34,21 @@ const Element = ({ field: { type, id, label, placeholder, value, input, options,
                 placeholder={placeholder}
                 value={value}
                 options={options}
+                width = {width}
             />)
         case 'checkbox':
             return (<Checkbox
                 id={id}
                 label={label}
                 value={value}
+                width = {width}
             />)
         case 'color':
             return (<Color
                 id={id}
                 label={label}
                 value={value}
+                width = {width}
             />)
 
         case 'date':
@@ -54,6 +58,7 @@ const Element = ({ field: { type, id, label, placeholder, value, input, options,
                 value={value}
                 min = {min}
                 max = {max}
+                width = {width}
             />)
         case 'datetime-local':
             return (<Datetime
@@ -62,6 +67,7 @@ const Element = ({ field: { type, id, label, placeholder, value, input, options,
                 value={value}
                 min = {min}
                 max = {max}
+                width = {width}
             />)
         case 'month':
             return (<Month
@@ -70,6 +76,7 @@ const Element = ({ field: { type, id, label, placeholder, value, input, options,
                 value={value}
                 min = {min}
                 max = {max}
+                width = {width}
             />)
         case 'email':
             return (<Email
@@ -77,12 +84,14 @@ const Element = ({ field: { type, id, label, placeholder, value, input, options,
                 label={label}
                 placeholder={placeholder}
                 value={value}
+                width = {width}
             />)
 
         case 'file':
             return (<File
                 id={id}
                 label={label}
+                width = {width}
             />)
 
         case 'number':
@@ -92,6 +101,7 @@ const Element = ({ field: { type, id, label, placeholder, value, input, options,
                 value={value}
                 min = {min}
                 max = {max}
+                width = {width}
             />)
         case 'tel':
             return (<Telephone
@@ -100,6 +110,7 @@ const Element = ({ field: { type, id, label, placeholder, value, input, options,
                 value={value}
                 placeholder={placeholder}
                 pattern={pattern}
+                width = {width}
                 
             />)
         case 'range':
@@ -108,7 +119,8 @@ const Element = ({ field: { type, id, label, placeholder, value, input, options,
                 label={label}
                 value={value}
                 min = {min}
-                max = {max}                    
+                max = {max} 
+                width = {width}                   
             />)
         case 'textarea':
             return (<Textarea
@@ -118,13 +130,15 @@ const Element = ({ field: { type, id, label, placeholder, value, input, options,
                 placeholder={placeholder}
                 cols = {cols}
                 rows = {rows} 
-                maxlength = {maxlength}                      
+                maxlength = {maxlength} 
+                width = {width}                     
             />)
         case 'button':
             return (<Button
                 id={id}
                 label={label}
-                value={value}                    
+                value={value}
+                width = {width}                    
             />)
 
         case 'radio':
@@ -133,6 +147,7 @@ const Element = ({ field: { type, id, label, placeholder, value, input, options,
                 label={label}
                 value = {value}
                 options={options}
+                width = {width}
             />)
         default:
             return null;

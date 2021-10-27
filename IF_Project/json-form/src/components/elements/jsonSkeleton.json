@@ -5,7 +5,8 @@
       "mandatory": "",
       "placeholder": "",
       "type": "text",
-      "value": ""
+      "value": "",
+      "width": ""
   }
   ,
 
@@ -15,21 +16,25 @@
       "value": "",
       "mandatory": "",
       "options": [{"option_label":""}],
-      "type": "select"
+      "type": "select",
+      "width": ""
   },
 
   {
       "id": "",
       "label": "",
       "value": "",
-      "type": "checkbox"
+      "type": "checkbox",
+      "width": ""
   },
 
   {
     "id": "",
     "label": "",
     "value": "",
-    "type": "color"
+    "type": "color",
+    "width": ""
+    
 },
 {
     "id": "",
@@ -37,7 +42,8 @@
     "mandatory": "",
     "placeholder": "",
     "value": "",
-    "type": "email"
+    "type": "email",
+    "width": ""
 },
 {
     "id": "",
@@ -46,7 +52,8 @@
     "value": "",
     "min": "",
     "filed_max": "",
-    "type": "date"
+    "type": "date",
+    "width": ""
 },
 {
     "id": "",
@@ -55,7 +62,8 @@
     "value": "",
     "min": "",
     "filed_max": "",
-    "type": "datetime-local"
+    "type": "datetime-local",
+    "width": ""
 },
 {
     "id": "",
@@ -64,13 +72,15 @@
     "value": "",
     "min": "",
     "filed_max": "",
-    "type": "month"
+    "type": "month",
+    "width": ""
 },
 {
     "id": "",
     "label": "",
     "mandatory": "",
-    "type": "file"
+    "type": "file",
+    "width": ""
 },
 {
     "id": "",
@@ -79,7 +89,8 @@
     "value": "",
     "min": "",
     "filed_max": "",
-    "type": "number"
+    "type": "number",
+    "width": ""
 },
 {
     "id": "",
@@ -88,7 +99,8 @@
     "placeholder": "",
     "value": "",
     "pattern":"",
-    "type": "tel"
+    "type": "tel",
+    "width": ""
 },
 {
     "id": "",
@@ -97,7 +109,8 @@
     "value": "",
     "min": "",
     "filed_max": "",
-    "type": "range"
+    "type": "range",
+    "width": ""
 },
 {
     "id": "",
@@ -107,19 +120,22 @@
     "cols": "",
     "rows":"",
     "maxlength": "",
-    "type": "textarea"
+    "type": "textarea",
+    "width": ""
 },
 {
     "id": "",
     "label": "",
     "value": "",
     "options": [{"option_label":""}],
-    "type": "radio"
+    "type": "radio",
+    "width": ""
 },
 {
     "id": "",
     "label": "",
     "value": "",
-    "type": "button"
+    "type": "button",
+    "width": ""
 }
 ]

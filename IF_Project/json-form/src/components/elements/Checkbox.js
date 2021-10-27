@@ -1,14 +1,17 @@
 import React, { useContext } from 'react'
 import { FormContext } from '../../FormContext';
-const Checkbox = ({ id, label, value }) => {
+const Checkbox = ({ id, label, value, width }) => {
     const { handleChange } = useContext(FormContext)
 
     return (
-        <div className="mb-3 form-check">
-            <input type="checkbox" className="form-check-input" id="exampleCheck1" checked={value}
-                onChange={event => handleChange(id, event)}
-            />
-            <label className="form-check-label" htmlFor="exampleCheck1">{label}</label>
+        <div class={width ? 'mb-3 col-md-'+width : 'mb-3 col-md-12'}>
+            <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck" checked={value}
+            onChange={event => handleChange(id, event)}/>
+            <label class="form-check-label" for="gridCheck">
+            {label}
+            </label>
+        </div>
         </div>
     )
 }
