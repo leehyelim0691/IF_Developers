@@ -1,125 +1,141 @@
 [
   {
-      "field_id": "",
-      "field_label": "",
-      "field_mandatory": "",
-      "field_placeholder": "",
-      "field_type": "text",
-      "field_value": ""
+      "id": "",
+      "label": "",
+      "mandatory": "",
+      "placeholder": "",
+      "type": "text",
+      "value": "",
+      "width": ""
   }
   ,
 
   {
-      "field_id": "",
-      "field_label": "",
-      "field_value": "",
-      "field_mandatory": "",
-      "field_options": [{"option_label":""}],
-      "field_type": "select"
+      "id": "",
+      "label": "",
+      "value": "",
+      "mandatory": "",
+      "options": [{"option_label":""}],
+      "type": "select",
+      "width": ""
   },
 
   {
-      "field_id": "",
-      "field_label": "",
-      "field_value": "",
-      "field_type": "checkbox"
+      "id": "",
+      "label": "",
+      "value": "",
+      "type": "checkbox",
+      "width": ""
   },
 
   {
-    "field_id": "",
-    "field_label": "",
-    "field_value": "",
-    "field_type": "color"
+    "id": "",
+    "label": "",
+    "value": "",
+    "type": "color",
+    "width": ""
+    
 },
 {
-    "field_id": "",
-    "field_label": "",
-    "field_mandatory": "",
-    "field_placeholder": "",
-    "field_value": "",
-    "field_type": "email"
+    "id": "",
+    "label": "",
+    "mandatory": "",
+    "placeholder": "",
+    "value": "",
+    "type": "email",
+    "width": ""
 },
 {
-    "field_id": "",
-    "field_label": "",
-    "field_mandatory": "",
-    "field_value": "",
-    "field_min": "",
+    "id": "",
+    "label": "",
+    "mandatory": "",
+    "value": "",
+    "min": "",
     "filed_max": "",
-    "field_type": "date"
+    "type": "date",
+    "width": ""
 },
 {
-    "field_id": "",
-    "field_label": "",
-    "field_mandatory": "",
-    "field_value": "",
-    "field_min": "",
+    "id": "",
+    "label": "",
+    "mandatory": "",
+    "value": "",
+    "min": "",
     "filed_max": "",
-    "field_type": "datetime-local"
+    "type": "datetime-local",
+    "width": ""
 },
 {
-    "field_id": "",
-    "field_label": "",
-    "field_mandatory": "",
-    "field_value": "",
-    "field_min": "",
+    "id": "",
+    "label": "",
+    "mandatory": "",
+    "value": "",
+    "min": "",
     "filed_max": "",
-    "field_type": "month"
+    "type": "month",
+    "width": ""
 },
 {
-    "field_id": "",
-    "field_label": "",
-    "field_mandatory": "",
-    "field_type": "file"
+    "id": "",
+    "label": "",
+    "mandatory": "",
+    "type": "file",
+    "width": ""
 },
 {
-    "field_id": "",
-    "field_label": " ",
-    "field_mandatory": "",
-    "field_value": "",
-    "field_min": "",
+    "id": "",
+    "label": " ",
+    "mandatory": "",
+    "value": "",
+    "min": "",
     "filed_max": "",
-    "field_type": "number"
+    "type": "number",
+    "width": ""
 },
 {
-    "field_id": "",
-    "field_label": "",
-    "field_mandatory": "",
-    "field_placeholder": "",
-    "field_value": "",
-    "field_pattern":"",
-    "field_type": "tel"
+    "id": "",
+    "label": "",
+    "mandatory": "",
+    "placeholder": "",
+    "value": "",
+    "pattern":"",
+    "type": "tel",
+    "width": ""
 },
 {
-    "field_id": "",
-    "field_label": "",
-    "field_mandatory": "",
-    "field_value": "",
-    "field_min": "",
+    "id": "",
+    "label": "",
+    "mandatory": "",
+    "value": "",
+    "min": "",
     "filed_max": "",
-    "field_type": "range"
+    "type": "range",
+    "width": ""
 },
 {
-    "field_id": "",
-    "field_label": "",
-    "field_placeholder": "",
-    "field_value": "",
-    "field_cols": "",
-    "field_rows":"",
-    "field_maxlength": "",
-    "field_type": "textarea"
+    "id": "",
+    "label": "",
+    "placeholder": "",
+    "value": "",
+    "cols": "",
+    "rows":"",
+    "maxlength": "",
+    "type": "textarea",
+    "width": ""
 },
 {
-    "field_id": "",
-    "field_label": "",
-    "field_value": "",
-    "field_options": [{"option_label":""}],
-    "field_type": "radio"
+    "id": "",
+    "label": "",
+    "value": "",
+    "options": [{"option_label":""}],
+    "type": "radio",
+    "width": ""
 },
 {
-    "field_id": "",
-    "field_label": "",
-    "field_value": "",
-    "field_type": "button"
+    "id": "",
+    "label": "",
+    "value": "",
+    "type": "button",
+    "width": ""
 }
 ]

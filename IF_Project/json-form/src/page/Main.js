@@ -11,7 +11,7 @@ function Main() {
   const [clicked, setClicked] = useState(false);
   const [schema,setSchema] = useState();
   const [elements, setElements] = useState(null);
-  const id = 0;
+  const ID = 0;
   const [form, setForm] = useState('{\n"page_label": "이력서 Form",\n"fields": [\n ]}');
   const [rSelected, setRSelected] = useState(null);
   const [json, setJson] = useState(null);
@@ -66,18 +66,18 @@ function Main() {
     element.click();
   };
 
-  const handleChange = (id, event) => {
+  const handleChange = (ID, event) => {
     const newElements = { ...elements }
     newElements.fields.forEach(field => {
-      const { field_type, field_id } = field;
-      if (id === field_id) {
-        switch (field_type) {
+      const { type, id } = field;
+      if (ID === id) {
+        switch (type) {
           case 'checkbox':
-            field['field_value'] = event.target.checked;
+            field['value'] = event.target.checked;
             break;
 
           default:
-            field['field_value'] = event.target.value;
+            field['value'] = event.target.value;
             break;
         }
       }
@@ -172,7 +172,9 @@ function Main() {
               <h3>{page_label}</h3>
               {clicked?
               <form>
+                <Row>
                 {fields ? fields.map((field, i) => <Element key={i} field={field} />) : null}
+                </Row>
               </form>
               :null}  
             </div> 

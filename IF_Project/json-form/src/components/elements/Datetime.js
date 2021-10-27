@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { FormContext } from '../../FormContext';
 
-const Datetime = ({ field_id, field_label, field_value, field_min, field_max }) => {
+const Datetime = ({ id, label, value, min, max, width }) => {
     const { handleChange } = useContext(FormContext)
     var today = new Date();
     var dd = today.getDate();
@@ -16,13 +16,13 @@ const Datetime = ({ field_id, field_label, field_value, field_min, field_max }) 
     today = yyyy+'-'+mm+'-'+dd+'T00:00';
     
     return (
-        <div className="mb-3">
-            <label htmlFor="datetime" className="form-label">{field_label}</label>
+        <div class={width ? 'mb-3 col-md-'+width : 'mb-3 col-md-4'}>
+            <label htmlFor="datetime" className="form-label">{label}</label>
             <input type="datetime-local" className="form-control" id="datetime" 
-                value = {field_value}
-                min = {field_min ? field_min : today}
-                max = {field_max ? field_max : ''}
-                onChange={event => handleChange(field_id, event)}
+                value = {value}
+                min = {min ? min : today}
+                max = {max ? max : ''}
+                onChange={event => handleChange(id, event)}
             />
         </div>
     )
