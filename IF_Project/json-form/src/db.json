@@ -1,21 +1,4 @@
 {
   "Form": [
-    {
-      "page_label": "이력서 Form",
-      "fields": [],
-      "id": 1
-    },
-    {
-      "page_label": "로그인 Form",
-      "fields": [
-        {
-          "field_id": "",
-          "field_label": "",
-          "field_value": "",
-          "field_type": "checkbox"
-        }
-      ],
-      "id": 2
-    }
   ]
 }
