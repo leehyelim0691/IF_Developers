@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { FormContext } from '../../FormContext';
+import {  Col} from 'reactstrap';
 
 const Email = ({ id, label, placeholder, value, width}) => {
     const { handleChange } = useContext(FormContext)

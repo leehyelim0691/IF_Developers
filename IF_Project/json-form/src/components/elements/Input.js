@@ -1,5 +1,6 @@
 import React, { useContext, useRef } from 'react'
 import { FormContext } from '../../FormContext';
+import {  Col} from 'reactstrap';
 
 const Input = ({ id, label, placeholder, value, input, width }) => {
     const { handleChange } = useContext(FormContext)
