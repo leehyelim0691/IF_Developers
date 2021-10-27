@@ -133,6 +133,7 @@ function Main() {
             </Row>
           </div>
         <div className="new-form">
+        <h3>{page_label}</h3>
           {clicked?
             <form>
               {fields ? fields.map((field, i) => <Element key={i} field={field} />) : null}
