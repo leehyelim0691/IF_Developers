@@ -107,7 +107,7 @@ function Main() {
     console.log(form);
     var data=JSON.parse(form);
     console.log(data);
-    axios.post('http://localhost:3000/Form',data)
+    axios.post('http://localhost:3002/api/upload',data)
     //성공시 then 실행
     .then(function (response) {
       console.log(response);
