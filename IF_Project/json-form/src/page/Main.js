@@ -17,6 +17,69 @@ function Main() {
   const [json, setJson] = useState(null);
   const [count, setCount] = useState(0);
   const { fields, page_label } = elements ?? {}
+  const [nums, setNums] = useState([
+    {
+      id: 0,
+      id_num: 1
+    },
+    {
+      id: 1,
+      id_num: 1
+    },
+    {
+      id: 2,
+      id_num: 1
+    },
+    {
+      id: 3,
+      id_num: 1
+    },
+    {
+      id: 4,
+      id_num: 1
+    },
+    {
+      id: 5,
+      id_num: 1
+    },
+    {
+      id: 6,
+      id_num: 1
+    },
+    {
+      id: 7,
+      id_num: 1
+    },
+    {
+      id: 8,
+      id_num: 1
+    },
+    {
+      id: 9,
+      id_num: 1
+    },
+    {
+      id: 10,
+      id_num: 1
+    },
+    {
+      id: 11,
+      id_num: 1
+    },
+    {
+      id: 12,
+      id_num: 1
+    },
+    {
+      id: 13,
+      id_num: 1
+    },
+    {
+      id: 14,
+      id_num: 1
+    },
+    
+  ]);
 
   useEffect(() => {
     setJson(jsonSkeleton);
@@ -87,16 +150,25 @@ function Main() {
   }
 
   const addJson = e => {
-    setRSelected(e); 
+    setNums(
+      nums.map(num =>
+        num.id === e ? { ...num, id_num : num.id_num+1} : num
+      )
+    );
+
+    nums.map(num =>
+      num.id == e ? (json[e].id = json[e].type + '_' + num.id_num) : (json[e].id = json[e].id)
+    );
+
+    setRSelected(e);
 
     if(count == 0){
       var txtArea =  document.getElementById('json-editor');
       var txtValue = txtArea.value;
       var selectPos = txtValue.length-2;
       var beforeTxt = txtValue.substring(0, selectPos);
-      var afterTxt = txtValue.substring(txtArea.selectionEnd+txtValue.length-2, txtValue.length); 
-      var addTxt = JSON.stringify(json[e],null, 4) + '\n'; 
-
+      var afterTxt = txtValue.substring(txtArea.selectionEnd+txtValue.length-2, txtValue.length);       
+      var addTxt = JSON.stringify(json[e],null, 4) + '\n';
       setForm(beforeTxt + addTxt + afterTxt);
       txtArea.value = beforeTxt + addTxt + afterTxt;
       selectPos = selectPos + addTxt.length;
@@ -117,7 +189,7 @@ function Main() {
       }
       else{
         var beforeTxt = txtValue.substring(0, selectPos);  
-        var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length);  
+        var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length); 
         var addTxt = ',' + JSON.stringify(json[e],null, 4)+ '\n'; 
         setForm(beforeTxt + addTxt + afterTxt);
         txtArea.value = beforeTxt + addTxt + afterTxt;
@@ -173,7 +245,7 @@ function Main() {
               {clicked?
               <form>
                 <Row>
-                {fields ? fields.map((field, i) => <Element key={i} field={field} />) : null}
+                {fields ? fields.map((field, i) => <Element key={i} field={field}/>) : null}
                 </Row>
               </form>
               :null}  
