@@ -16,11 +16,11 @@ import Button from './elements/Button';
 import Radio from './elements/Radio';
 
 const Element = ({ field: { type, id, label, placeholder, value, input, options, min, max, pattern, cols,rows, maxlength, width } }) => {
-
     switch (type) {
         case 'text':
+            const idname = 'text'+{id};
             return (<Input
-                id={id}
+                id={idname}
                 label={label}
                 placeholder={placeholder}
                 value={value}
