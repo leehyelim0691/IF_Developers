@@ -1,0 +1,133 @@
+
+    {
+        "page_label": "이력서 Form",
+        "fields": [
+            {
+                "id": "english_name",
+                "label": "이름",
+                "mandatory": "yes",
+                "placeholder": "이름을 입력하세요",
+                "type": "text",
+                "value": ""
+            },
+            {
+                "id": "employment",
+                "label": "종류",
+                "value": "Part-Time",
+                "mandatory": "yes",
+                "options": [
+                    {
+                        "option_label": "정직원"
+                    },
+                    {
+                        "option_label": "알바"
+                    }
+                ],
+                "type": "select"
+            },
+            {
+                "id": "driving_license",
+                "label": "운전면허가 있습니다.",
+                "type": "checkbox",
+                "value": "checked"
+            },
+            {
+                "id": "color",
+                "label": "좋아하는 색을 고르세요.",
+                "mandatory": "yes",
+                "value": "#ff0000",
+                "type": "color"
+            },
+            {
+                "id": "date",
+                "label": "생일을 입력하세요.",
+                "mandatory": "yes",
+                "value": "1999-04-22",
+                "min": "1950-01-01",
+                "filed_max": "2022-12-31",
+                "type": "date"
+            },
+            {
+                "id": "datetime",
+                "label": "예약 시간을 정하세요.",
+                "mandatory": "yes",
+                "value": "",
+                "min": "",
+                "filed_max": "2022-12-31T00:00",
+                "type": "datetime-local"
+            },
+            {
+                "id": "month",
+                "label": "휴가 갈 월을 선택하세요.",
+                "mandatory": "yes",
+                "value": "",
+                "min": "",
+                "filed_max": "2022-12",
+                "type": "month"
+            },
+            {
+                "id": "email",
+                "label": "이메일을 입력하세요",
+                "mandatory": "yes",
+                "placeholder": "abc@example.com",
+                "value": "",
+                "type": "email"
+            },
+            {
+                "id": "file",
+                "label": "파일을 선택하세요",
+                "mandatory": "yes",
+                "type": "file"
+            },
+            {
+                "id": "quantity",
+                "label": "몇개를 주문하시겠습니까? ",
+                "mandatory": "yes",
+                "value": "",
+                "min": "1",
+                "filed_max": "10",
+                "type": "number"
+            },
+            {
+                "id": "telephone",
+                "label": "전화번호를 입력하세요",
+                "mandatory": "yes",
+                "placeholder": "010-1234-5678",
+                "value": "",
+                "pattern":"[0-9]{3}-[0-9]{4}-[0-9]{4}",
+                "type": "tel"
+            },
+            {
+                "id": "range",
+                "label": "볼륨을 정하세요.",
+                "mandatory": "yes",
+                "value": "",
+                "min": "0",
+                "filed_max": "50",
+                "type": "range"
+            },
+            {
+                "id": "comment",
+                "label": "후기를 입력하세요",
+                "placeholder": "후기를 입력하세요",
+                "value": "",
+                "cols": "500",
+                "rows":"10",
+                "maxlength": "1000",
+                "type": "textarea"
+            },
+            {
+                "id": "radio",
+                "label": "성별을 선택하세요",
+                "value": "sex",
+                "options": [{"option_label":"남자"},{"option_label":"여자"}],
+                "type": "radio"
+            }, 
+            {
+                "id": "submint button",
+                "label": "Submit",
+                "value": "",
+                "type": "button"
+            }
+        ]
+    }
