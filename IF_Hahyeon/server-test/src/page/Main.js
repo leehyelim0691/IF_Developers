@@ -6,98 +6,31 @@ import Element from '../components/Element';
 import { FormContext } from '../FormContext';
 import jsonSkeleton from '../components/elements/jsonSkeleton.json';
 import axios from 'axios';
-import JSONInput from 'react-json-editor-ajrm';
-import locale    from 'react-json-editor-ajrm/locale/en';
-import { objectExpression } from '@babel/types';
 
 function Main() {
   const [clicked, setClicked] = useState(false);
   const [schema,setSchema] = useState();
   const [elements, setElements] = useState(null);
   const ID = 0;
-  //const [form, setForm] = useState('{\n"page_label": "이력서 Form",\n"fields": [\n ]}');
-  const [form, setForm] = useState({"page_label": "이력서 Form","fields": []});
+  const [form, setForm] = useState('{\n"page_label": "이력서 Form",\n"fields": [\n ]}');
   const [rSelected, setRSelected] = useState(null);
   const [json, setJson] = useState(null);
   const [count, setCount] = useState(0);
   const { fields, page_label } = elements ?? {}
-  const [nums, setNums] = useState([
-    {
-      id: 0,
-      id_num: 1
-    },
-    {
-      id: 1,
-      id_num: 1
-    },
-    {
-      id: 2,
-      id_num: 1
-    },
-    {
-      id: 3,
-      id_num: 1
-    },
-    {
-      id: 4,
-      id_num: 1
-    },
-    {
-      id: 5,
-      id_num: 1
-    },
-    {
-      id: 6,
-      id_num: 1
-    },
-    {
-      id: 7,
-      id_num: 1
-    },
-    {
-      id: 8,
-      id_num: 1
-    },
-    {
-      id: 9,
-      id_num: 1
-    },
-    {
-      id: 10,
-      id_num: 1
-    },
-    {
-      id: 11,
-      id_num: 1
-    },
-    {
-      id: 12,
-      id_num: 1
-    },
-    {
-      id: 13,
-      id_num: 1
-    },
-    {
-      id: 14,
-      id_num: 1
-    },
-    
-  ]);
 
   useEffect(() => {
     setJson(jsonSkeleton);
-  },[]);
+  },[])
   
-  const textChange = (JsonData) => {
-    setForm(JsonData);
+  const textChange = (e) => {
+    setForm(e.target.value);
   }
 
   const onClickCreate = () => {
-    // var schema = document.getElementById('json-editor');
-    // console.log(schema);
-    // var myobj=JSON.parse(schema);
-    setElements(form);
+    var schema = document.getElementById('json-editor').value;
+    console.log(schema);
+    var myobj=JSON.parse(schema);
+    setElements(myobj);
     setClicked(true);
   };
 
@@ -108,10 +41,10 @@ function Main() {
   };
 
   const onClickSave = () => {
-    // console.log(form);
-    // var data=JSON.parse(form);
-    // console.log(data);
-    axios.post('http://localhost:3002/api/upload',form)
+    console.log(form);
+    var data=JSON.parse(form);
+    console.log(data);
+    axios.post('http://localhost:3002/api/upload',data)
     //성공시 then 실행
     .then(function (response) {
       console.log(response);
@@ -124,10 +57,11 @@ function Main() {
   };
 
   const onClickDownload = () => {
+    var formObj=JSON.parse(form);
     const element = document.createElement("a");
     const file = new Blob([document.getElementById('json-editor').value], {type: 'text/plain'});
     element.href = URL.createObjectURL(file);
-    element.download = form.page_label+".txt";
+    element.download = formObj.page_label+".txt";
     document.body.appendChild(element); // Required for this to work in FireFox
     element.click();
   };
@@ -153,33 +87,16 @@ function Main() {
   }
 
   const addJson = e => {
-    setNums(
-      nums.map(num =>
-        num.id === e ? { ...num, id_num : num.id_num+1} : num
-      )
-    );
+    setRSelected(e); 
 
-    nums.map(num =>
-      num.id == e ? (json[e].id = json[e].type + '_' + num.id_num) : (json[e].id = json[e].id)
-    );
-
-    setRSelected(e);
-    
-    if(count == 0){
-      var temp = {...form,fields:[...form.fields]};
-      temp.fields.push(json[e]);
-      console.log(temp);
-      textChange(temp);
-    }
-    
-/*
     if(count == 0){
       var txtArea =  document.getElementById('json-editor');
       var txtValue = txtArea.value;
       var selectPos = txtValue.length-2;
       var beforeTxt = txtValue.substring(0, selectPos);
-      var afterTxt = txtValue.substring(txtArea.selectionEnd+txtValue.length-2, txtValue.length);       
-      var addTxt = JSON.stringify(json[e],null, 4) + '\n';
+      var afterTxt = txtValue.substring(txtArea.selectionEnd+txtValue.length-2, txtValue.length); 
+      var addTxt = JSON.stringify(json[e],null, 4) + '\n'; 
+
       setForm(beforeTxt + addTxt + afterTxt);
       txtArea.value = beforeTxt + addTxt + afterTxt;
       selectPos = selectPos + addTxt.length;
@@ -200,7 +117,7 @@ function Main() {
       }
       else{
         var beforeTxt = txtValue.substring(0, selectPos);  
-        var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length); 
+        var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length);  
         var addTxt = ',' + JSON.stringify(json[e],null, 4)+ '\n'; 
         setForm(beforeTxt + addTxt + afterTxt);
         txtArea.value = beforeTxt + addTxt + afterTxt;
@@ -209,7 +126,6 @@ function Main() {
       }
     }
     setCount(count+1);
-    */
   }
     
   return (
@@ -241,20 +157,7 @@ function Main() {
       <div className="editor-container">
         <div className="editor-box" >
           <div className="editor-head"><h5>JSONSchema</h5></div> 
-            {/* <textarea className="json-editor" id="json-editor" value={form} onChange={textChange}>{schema}</textarea> */}
-            <JSONInput 
-              id="json-editor" 
-              // onBlur={form} //이게 textarea에서 value 값
-              placeholder = {form}
-              colors={{
-                string: "#DAA520"
-              }}
-              locale      = { locale }
-              height      = '100%'
-              width      = '100%'
-              onChange = {textChange}
-            />
-            
+            <textarea className="json-editor" id="json-editor" value={form} onChange={textChange}>{schema}</textarea>
             <Row>
               <Col>
               <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickReset()}}>Reset</button>              
@@ -270,7 +173,7 @@ function Main() {
               {clicked?
               <form>
                 <Row>
-                {fields ? fields.map((field, i) => <Element key={i} field={field}/>) : null}
+                {fields ? fields.map((field, i) => <Element key={i} field={field} />) : null}
                 </Row>
               </form>
               :null}  
