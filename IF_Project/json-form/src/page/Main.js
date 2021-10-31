@@ -6,13 +6,17 @@ import Element from '../components/Element';
 import { FormContext } from '../FormContext';
 import jsonSkeleton from '../components/elements/jsonSkeleton.json';
 import axios from 'axios';
+import JSONInput from 'react-json-editor-ajrm';
+import locale    from 'react-json-editor-ajrm/locale/en';
+import { objectExpression } from '@babel/types';
 
 function Main() {
   const [clicked, setClicked] = useState(false);
   const [schema,setSchema] = useState();
   const [elements, setElements] = useState(null);
   const ID = 0;
-  const [form, setForm] = useState('{\n"page_label": "이력서 Form",\n"fields": [\n ]}');
+  //const [form, setForm] = useState('{\n"page_label": "이력서 Form",\n"fields": [\n ]}');
+  const [form, setForm] = useState({"page_label": "이력서 Form","fields": []});
   const [rSelected, setRSelected] = useState(null);
   const [json, setJson] = useState(null);
   const [count, setCount] = useState(0);
@@ -83,17 +87,17 @@ function Main() {
 
   useEffect(() => {
     setJson(jsonSkeleton);
-  },[])
+  },[]);
   
-  const textChange = (e) => {
-    setForm(e.target.value);
+  const textChange = (JsonData) => {
+    setForm(JsonData);
   }
 
   const onClickCreate = () => {
-    var schema = document.getElementById('json-editor').value;
-    console.log(schema);
-    var myobj=JSON.parse(schema);
-    setElements(myobj);
+    // var schema = document.getElementById('json-editor');
+    // console.log(schema);
+    // var myobj=JSON.parse(schema);
+    setElements(form);
     setClicked(true);
   };
 
@@ -104,10 +108,10 @@ function Main() {
   };
 
   const onClickSave = () => {
-    console.log(form);
-    var data=JSON.parse(form);
-    console.log(data);
-    axios.post('http://localhost:3002/api/upload',data)
+    // console.log(form);
+    // var data=JSON.parse(form);
+    // console.log(data);
+    axios.post('http://localhost:3002/api/upload',form)
     //성공시 then 실행
     .then(function (response) {
       console.log(response);
@@ -120,11 +124,10 @@ function Main() {
   };
 
   const onClickDownload = () => {
-    var formObj=JSON.parse(form);
     const element = document.createElement("a");
     const file = new Blob([document.getElementById('json-editor').value], {type: 'text/plain'});
     element.href = URL.createObjectURL(file);
-    element.download = formObj.page_label+".txt";
+    element.download = form.page_label+".txt";
     document.body.appendChild(element); // Required for this to work in FireFox
     element.click();
   };
@@ -161,7 +164,15 @@ function Main() {
     );
 
     setRSelected(e);
-
+    
+    if(count == 0){
+      var temp = {...form,fields:[...form.fields]};
+      temp.fields.push(json[e]);
+      console.log(temp);
+      textChange(temp);
+    }
+    
+/*
     if(count == 0){
       var txtArea =  document.getElementById('json-editor');
       var txtValue = txtArea.value;
@@ -198,6 +209,7 @@ function Main() {
       }
     }
     setCount(count+1);
+    */
   }
     
   return (
@@ -229,7 +241,20 @@ function Main() {
       <div className="editor-container">
         <div className="editor-box" >
           <div className="editor-head"><h5>JSONSchema</h5></div> 
-            <textarea className="json-editor" id="json-editor" value={form} onChange={textChange}>{schema}</textarea>
+            {/* <textarea className="json-editor" id="json-editor" value={form} onChange={textChange}>{schema}</textarea> */}
+            <JSONInput 
+              id="json-editor" 
+              // onBlur={form} //이게 textarea에서 value 값
+              placeholder = {form}
+              colors={{
+                string: "#DAA520"
+              }}
+              locale      = { locale }
+              height      = '100%'
+              width      = '100%'
+              onChange = {textChange}
+            />
+            
             <Row>
               <Col>
               <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickReset()}}>Reset</button>              
