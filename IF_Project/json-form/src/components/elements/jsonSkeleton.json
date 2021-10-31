@@ -33,7 +33,7 @@
     "id": "",
     "label": "Color picker",
     "value": "",
-    "width": "one",
+    "width": "",
     "type": "color"
     
 },
@@ -76,7 +76,7 @@
     "id": "",
     "label": "File Label",
     "value": "",
-    "width": "quarter",
+    "width": "half",
     "type": "file"
 },
 {
@@ -94,7 +94,7 @@
     "placeholder": "010-7579-5847",
     "value": "",
     "pattern":"[0-9]{3}-[0-9]{4}-[0-9]{4}",
-    "width": "quarter",
+    "width": "half",
     "type": "tel"
 },
 {
@@ -103,6 +103,7 @@
     "value": "",
     "min": "0",
     "max": "100",
+    "step": "1",
     "width": "full",
     "type": "range"
 },

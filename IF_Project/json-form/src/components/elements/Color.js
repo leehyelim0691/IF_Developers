@@ -3,10 +3,18 @@ import { FormContext } from '../../FormContext';
 
 const Color = ({ id, label, value, width }) => {
     const { handleChange } = useContext(FormContext)
+    var setwidth = ""
+    switch(width){
+        case "one" : setwidth = "col-md-1"; break;
+        case "quarter" : setwidth = "col-md-4"; break;
+        case "half" : setwidth = "col-md-6" ; break;
+        case "full" : setwidth = "col-md-12" ; break;
+        default: setwidth = width;
+    }
     return (
-        <div >
+        <div className="mb-3" >
             <label htmlFor="favcolor" className="form-label">{label}</label>
-            <input type="color" class={width? 'mb-3 col-md-'+width: 'mb-3 form-control-color'} className="form-control" id="favcolor" 
+            <input type="color" className={width? "form-border "+ setwidth: 'form-border col-md-1'}  id="favcolor" 
                 value={value}
                 onChange={event => handleChange(id, event)}
             />

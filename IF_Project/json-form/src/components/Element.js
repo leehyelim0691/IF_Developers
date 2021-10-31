@@ -15,7 +15,8 @@ import Textarea from './elements/Textarea';
 import Button from './elements/Button';
 import Radio from './elements/Radio';
 
-const Element = ({ field: { type, id, label, placeholder, value, input, options, min, max, pattern, cols,rows, maxlength, width } }) => {
+const Element = ({ field: { type, id, label, placeholder, value, input, options, min, max, pattern, cols,rows, maxlength, step, width } }) => {
+    
     switch (type) {
         case 'text':
             const idname = 'text'+{id};
@@ -120,6 +121,7 @@ const Element = ({ field: { type, id, label, placeholder, value, input, options,
                 value={value}
                 min = {min}
                 max = {max} 
+                step = {step}
                 width = {width}                   
             />)
         case 'textarea':
