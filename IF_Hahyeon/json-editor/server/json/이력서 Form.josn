@@ -1,0 +1,19 @@
+{
+    "page_label": "이력서 Form",
+    "fields": [
+        {
+            "id": "checkbox_1",
+            "label": "",
+            "value": "",
+            "type": "checkbox",
+            "width": ""
+        },
+        {
+            "id": "color_1",
+            "label": "",
+            "value": "",
+            "type": "color",
+            "width": ""
+        }
+    ]
+}
