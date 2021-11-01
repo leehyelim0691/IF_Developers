@@ -212,6 +212,22 @@ function Main() {
     });
   };
 
+  const onClickRead = () => {
+    // console.log(form);
+    // var data=JSON.parse(form);
+    // console.log(data);
+    axios.get('http://localhost:3002/api/read')
+    //성공시 then 실행
+    .then(function (response) {
+      console.log(response.data);
+      alert("데이터를 읽었습니다.");
+    })
+    //실패 시 catch 실행
+    .catch(function (error) {
+      console.log(error);
+    });
+  };
+
   const onClickDownload = () => {
     const element = document.createElement("a");
     const file = new Blob([document.getElementById('json-editor').value], {type: 'text/plain'});
@@ -371,6 +387,11 @@ function Main() {
                 <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickCreate()}}>Create</button>
               </Col>
             </Row> */}
+            {/* <Row>
+            <Col>
+                <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickRead()}}>Read</button>
+              </Col>
+              </Row> */}
           </div>
           <div className="form-box"> 
             <div className="new-form">
