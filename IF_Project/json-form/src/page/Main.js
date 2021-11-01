@@ -281,7 +281,7 @@ function Main() {
                 {fields ? fields.map((field, i) => <Element key={i} field={field}/>) : null}
                 </Row>
               </form>
-              :null}  
+              :null} 
             </div> 
             <Row>
               <Col>
@@ -290,7 +290,7 @@ function Main() {
               <Col>
                 <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickDownload()}}>Download</button>
               </Col>
-            </Row>
+            </Row> 
         </div>
       </div>
     </div>  
