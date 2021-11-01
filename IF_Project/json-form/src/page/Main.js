@@ -150,6 +150,7 @@ function Main() {
     // var schema = document.getElementById('json-editor');
     // console.log(schema);
     // var myobj=JSON.parse(schema);
+    console.log(form);
     setElements(form);
     setClicked(true);
     // setError ("동일한 아이디가 존재합니다.");
@@ -189,7 +190,8 @@ function Main() {
 
 
   const onClickReset = () => {
-    setForm('{\n"page_label": "Form 1",\n"fields": [\n ]}');
+    var reset = {"page_label":'Form 1',fields:[]};
+    setForm(reset);
     //setForm('{\n"page_label": "이력서 Form",\n"group": [\n{\n"group_name": "",\n"fields": [\n]}\n]}');
     setCount(0);
   };
@@ -350,7 +352,7 @@ function Main() {
             {/* <textarea className="json-editor" id="json-editor" value={form} onChange={textChange}>{schema}</textarea> */}
             <JSONInput 
               id="json-editor" 
-              // onBlur={form} //이게 textarea에서 value 값
+              onBlur={form} //이게 textarea에서 value 값
               placeholder = {form}
               colors={{
                 string: "#DAA520"
