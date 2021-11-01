@@ -21,57 +21,6 @@ function Main() {
   const [json, setJson] = useState(null);
   const [count, setCount] = useState(0);
   const { fields, page_label } = elements ?? {}
-  const form3 = form.slice(1,form.length-1);
-  const [form1, setForm1] = useState('{"page_label": "이력서 Form","fields": [{"id": "date_1",},{"id": "datetime-local_1",}]}');
-  // const form1={
-    // "page_label": "이력서 Form",
-    // "fields": [
-    //  {
-    //     "id": "date_1",
-    //     "label": "",
-    //     "mandatory": "",
-    //     "value": "",
-    //     "min": "",
-    //     "filed_max": "",
-    //     "type": "date",
-    //     "width": ""
-    // }
-    // ,{
-    //     "id": "datetime-local_1",
-    //     "label": "",
-    //     "mandatory": "",
-    //     "value": "",
-    //     "min": "",
-    //     "filed_max": "",
-    //     "type": "datetime-local",
-    //     "width": ""
-    // }
-    // ]}
-  const form2={
-    "fields": [
-      {
-         "id": "date_1",
-         "label": "",
-         "mandatory": "",
-         "value": "",
-         "min": "",
-         "filed_max": "",
-         "type": "date",
-         "width": ""
-     }
-     ,{
-         "id": "datetime-local_1",
-         "label": "",
-         "mandatory": "",
-         "value": "",
-         "min": "",
-         "filed_max": "",
-         "type": "datetime-local",
-         "width": ""
-     }
-     ]
-  }
-  const [error, setError] = useState(null);
   const [nums, setNums] = useState([
     {
       id: 0,
@@ -150,40 +99,7 @@ function Main() {
     // var myobj=JSON.parse(schema);
     setElements(form);
     setClicked(true);
-    // setError ("동일한 아이디가 존재합니다.");
-
-    // form.map((input_type) =>(
-    //   form.map((input_type1) =>{
-    //     if(input_type.id==input_type1.id1){
-    //       setError ("동일한 아이디가 존재합니다.");
-    //     }
-    //   })
-    // ))
-
   };
-  const mydata = {
-    "myDeviceData":[
-      {
-        "name":"iPad Pro",
-        "RAM":6,
-        "HomeButton":false,
-        "TouchID":"No",
-        "FaceID":"Yes"
-      },{
-        "name":"iPhone Xs",
-        "RAM":4,
-        "HomeButton":false,
-        "TouchID":"No",
-        "FaceID":"Yes"
-      },{
-        "name":"iPhone 6",
-        "RAM":1,
-        "HomeButton":true,
-        "TouchID":"Yes",
-        "FaceID":"No"
-      }
-    ]
-};
 
 
   const onClickReset = () => {
@@ -217,13 +133,6 @@ function Main() {
   };
 
   const handleChange = (ID, event) => {
-    // form.map((input_type) =>(
-    //   form.map((input_type1) =>{
-    //     if(input_type.id==input_type1.id1){
-    //       setError ("동일한 아이디가 존재합니다.");
-    //     }
-    //   })
-    // ))
     const newElements = { ...elements }
     newElements.fields.forEach(field => {
       const { type, id } = field;
@@ -269,8 +178,7 @@ function Main() {
       var txtValue = txtArea.value;
       var selectPos = txtValue.length-2;
       var beforeTxt = txtValue.substring(0, selectPos);
-      var afterTxt = txtValue.substring(txtArea.selectionEnd+txtValue.length-2, txtValue.length);     
-      if(afterTxt=='') afterTxt = ']}';  
+      var afterTxt = txtValue.substring(txtArea.selectionEnd+txtValue.length-2, txtValue.length);       
       var addTxt = JSON.stringify(json[e],null, 4) + '\n';
       setForm(beforeTxt + addTxt + afterTxt);
       txtArea.value = beforeTxt + addTxt + afterTxt;
@@ -281,11 +189,6 @@ function Main() {
       var txtArea =  document.getElementById('json-editor');
       var txtValue = txtArea.value;
       var selectPos = txtArea.selectionStart; 
-      var check;
-      if(selectPos=='') {
-        selectPos = txtValue.length-2;
-        check = 1;
-      }
       if(txtValue.substring(selectPos-1,selectPos)=='[' || txtValue.substring(selectPos-2,selectPos-1)=='['){
         var beforeTxt = txtValue.substring(0, selectPos); 
         var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length);  
@@ -296,11 +199,10 @@ function Main() {
         txtArea.selectionEnd = selectPos; 
       }
       else{
-        var beforeTxt = txtValue.substring(0, selectPos); 
-        if(check==1) var afterTxt=']}';
-        else var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length); 
+        var beforeTxt = txtValue.substring(0, selectPos);  
+        var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length); 
         var addTxt = ',' + JSON.stringify(json[e],null, 4)+ '\n'; 
-        setForm(beforeTxt+addTxt+afterTxt);
+        setForm(beforeTxt + addTxt + afterTxt);
         txtArea.value = beforeTxt + addTxt + afterTxt;
         selectPos = selectPos + addTxt.length;
         txtArea.selectionEnd = selectPos; 
@@ -380,45 +282,6 @@ function Main() {
               <Col>
                 <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickDownload()}}>Download</button>
               </Col>
-              {/* <Col> */}
-              {/* {error} */}
-              <div>
-                {/* {
-                  form.map((f) => {
-                    return (
-                      <div>
-                        안녕? {f.id}
-                      </div>
-                    )
-                  }
-                  )
-                } */}
-                <div>
-                {/* {alert('Click!')} */}
-            {
-                // form && form.fields.map((myAppleDevice) => {
-                //     console.log('idx is ' + JSON.stringify(myAppleDevice.name));
-                //     return(
-                //         <div>
-                //             이름 : { myAppleDevice.name } <br></br>
-                //             램 : { myAppleDevice.RAM }GB<br></br>
-                //             홈버튼 : { ((myAppleDevice.HomeButton === true) ? '있음' : '없음') } <br></br>
-                //             터치 ID : { myAppleDevice.TouchID } <br></br>
-                //             페이스 ID : { myAppleDevice.FaceID } <br></br><br></br>
-                //          </div>
-                //     );
-                // })
-            }
-            {/* {form2} */}
-            {form}
-            {/* form1,3은 {} 없음 */}
-            ;;;;;;;;;;;;;;;;;;
-            {/* {form3} */}
-            {/* {form1} */}
-            {/* {form.fields} */}
-        </div>
-              </div>
-              {/* </Col> */}
             </Row>
         </div>
       </div>

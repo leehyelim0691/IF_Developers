@@ -1,0 +1,141 @@
+[
+  {
+      "id": "",
+      "label": "",
+      "mandatory": "",
+      "placeholder": "",
+      "type": "text",
+      "value": "",
+      "width": ""
+  }
+  ,
+
+  {
+      "id": "",
+      "label": "",
+      "value": "",
+      "mandatory": "",
+      "options": [{"option_label":""}],
+      "type": "select",
+      "width": ""
+  },
+
+  {
+      "id": "",
+      "label": "",
+      "value": "",
+      "type": "checkbox",
+      "width": ""
+  },
+
+  {
+    "id": "",
+    "label": "",
+    "value": "",
+    "type": "color",
+    "width": ""
+    
+},
+{
+    "id": "",
+    "label": "",
+    "mandatory": "",
+    "placeholder": "",
+    "value": "",
+    "type": "email",
+    "width": ""
+},
+{
+    "id": "",
+    "label": "",
+    "mandatory": "",
+    "value": "",
+    "min": "",
+    "filed_max": "",
+    "type": "date",
+    "width": ""
+},
+{
+    "id": "",
+    "label": "",
+    "mandatory": "",
+    "value": "",
+    "min": "",
+    "filed_max": "",
+    "type": "datetime-local",
+    "width": ""
+},
+{
+    "id": "",
+    "label": "",
+    "mandatory": "",
+    "value": "",
+    "min": "",
+    "filed_max": "",
+    "type": "month",
+    "width": ""
+},
+{
+    "id": "",
+    "label": "",
+    "mandatory": "",
+    "type": "file",
+    "width": ""
+},
+{
+    "id": "",
+    "label": " ",
+    "mandatory": "",
+    "value": "",
+    "min": "",
+    "filed_max": "",
+    "type": "number",
+    "width": ""
+},
+{
+    "id": "",
+    "label": "",
+    "mandatory": "",
+    "placeholder": "",
+    "value": "",
+    "pattern":"",
+    "type": "tel",
+    "width": ""
+},
+{
+    "id": "",
+    "label": "",
+    "mandatory": "",
+    "value": "",
+    "min": "",
+    "filed_max": "",
+    "type": "range",
+    "width": ""
+},
+{
+    "id": "",
+    "label": "",
+    "placeholder": "",
+    "value": "",
+    "cols": "",
+    "rows":"",
+    "maxlength": "",
+    "type": "textarea",
+    "width": ""
+},
+{
+    "id": "",
+    "label": "",
+    "value": "",
+    "options": [{"option_label":""}],
+    "type": "radio",
+    "width": ""
+},
+{
+    "id": "",
+    "label": "",
+    "value": "",
+    "type": "button",
+    "width": ""
+}
+]
