@@ -23,7 +23,7 @@ function Main() {
   const [json, setJson] = useState(null);
   const [count, setCount] = useState(0);
   const { fields, page_label } = elements ?? {}
-  const form3 = form.slice(1,form.length-1);
+  //const form3 = form.slice(1,form.length-1);
   const [form1, setForm1] = useState('{"page_label": "이력서 Form","fields": [{"id": "date_1",},{"id": "datetime-local_1",}]}');
   // const form1={
     // "page_label": "이력서 Form",
