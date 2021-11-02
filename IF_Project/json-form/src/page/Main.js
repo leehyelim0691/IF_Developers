@@ -7,6 +7,7 @@ import Element from '../components/Element';
 import { FormContext } from '../FormContext';
 import jsonSkeleton from '../components/elements/jsonSkeleton.json';
 import axios from 'axios';
+import {Modal, Form} from 'react-bootstrap';
 
 
 /*
