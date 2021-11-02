@@ -1,6 +1,6 @@
 import '../css/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Button, Form, FormGroup, Label, Col, Row, View} from 'reactstrap';
+import { Container, Button, FormGroup, Label, Col, Row, View} from 'reactstrap';
 import { FaRedo, FaPlay } from 'react-icons/fa';
 import React,{ useState, useEffect, useRef} from 'react';
 import Element from '../components/Element';
@@ -258,7 +258,13 @@ function Main() {
       setCount(count+1);
     }
   }
-    
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+
+
   return (
     <FormContext.Provider value={{ handleChange }}>
       {/* {onHi()} */}
@@ -309,14 +315,40 @@ function Main() {
             </div> 
             <Row>
               <Col>
-              <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickSave()}}>Save</button>              
+              <button className="btn btn-large btn-secondary create-btn" onClick={handleShow}>Save</button>
+               {/* <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickSave()}}>Save</button>*/}
               </Col>
               <Col>
-                <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickDownload()}}>Download</button>
+                <button className="btn btn-large btn-secondary create-btn" onClick={handleClose}>Download</button>
               </Col>
             </Row>
         </div>
       </div>
+       <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Json 파일 저장하기</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+          <Form.Group className="mb-3" controlId="formBasicText">
+          <Form.Label>Template Name</Form.Label>
+          <Form.Control type="text" placeholder="저장할 파일의 이름을 입력하세요." />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicTextarea">
+          <Form.Label>Template Description</Form.Label>
+          <Form.Control type="textarea" rows="3" placeholder="설명을 입력하세요." />
+        </Form.Group>
+          </Form> 
+          </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>  
     </FormContext.Provider>
   );
