@@ -9,9 +9,7 @@ import jsonSkeleton from '../components/elements/jsonSkeleton.json';
 import axios from 'axios';
 import {Modal, Form, Navbar} from 'react-bootstrap';
 import Select from 'react-select';
-<<<<<<< HEAD
 import template1 from './template1.json';
-=======
 
 const templates = [
   {value:'template1', label: 'Template1'},
@@ -23,7 +21,6 @@ const templates = [
 const LoadTemplate= () => {
   //template 로드 해 오기! 
 }
->>>>>>> 43eea848e10323dcbe61be08f5ef40cdc293e4a0
 
 function Main() {
   //template 파일 넣기,, 
@@ -36,18 +33,13 @@ function Main() {
   const [rSelected, setRSelected] = useState(null);
   const [json, setJson] = useState(null);
   const [count, setCount] = useState(0);
-<<<<<<< HEAD
   const [fileName, setFileName] = useState("");
   const [description, setDescription] = useState("");
   const [{temValue,temLable},{setTemValue,setTemLable}] = useState([{"test":"test"}]);
-  const { fields, page_label } = elements ?? {}
-=======
   const [groupCount, setGroupCount] = useState(2);
   const [groupElement, setGroupElement] = useState(0);
   // const { fields, page_label } = elements ?? {}
   const { group, fields, page_label } = elements ?? {}
-  // const { group, fields } = elements ?? {}
->>>>>>> 43eea848e10323dcbe61be08f5ef40cdc293e4a0
   const [error, setError] = useState(null);
   //template 파일 넣기,, 
   const templates = [
@@ -138,6 +130,14 @@ function Main() {
   
   const textChange = (e) => {
     setForm(e.target.value);
+  }
+
+  const handleFileName = (e) => {
+    setFileName(e.target.value);
+  }
+
+  const handleDescription = (e) => {
+    setDescription(e.target.value);
   }
 
   const onClickCreate = () => {
@@ -321,7 +321,7 @@ function Main() {
           <Navbar.Brand className="h1 ml-5">2021 Bizflow Project</Navbar.Brand>
         </Navbar>
       <Container>
-        <FormGroup>
+        <FormGroup className="mt-3">
             <Label className="mb-3 inputType">Select the Form Element you want to create</Label>
             <Form className="mb-3">
               <Button outline color="danger" onClick={() => addJson(15)} active={rSelected === 15}>Group</Button>{' '}
@@ -374,7 +374,7 @@ function Main() {
                     <div key={key}>
                     <div class="mx-4 my-2 mt-3" >
                     <label class="form-label font-weight-bold">{group.group_name}</label>
-                    <div class="pt-2 row border">
+                    <div class="p-3 row border">
                       <Row>
                         {group.fields ? group.fields.map((field, i) => <Element key={i} field={field}/>) : null}
                       </Row>
