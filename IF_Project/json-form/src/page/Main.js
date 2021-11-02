@@ -1,13 +1,13 @@
 import '../css/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Button, FormGroup, Label, Col, Row, View} from 'reactstrap';
+import { Container, Button, FormGroup, Label, Col, Row, Input } from 'reactstrap';
 import { FaRedo, FaPlay } from 'react-icons/fa';
 import React,{ useState, useEffect, useRef} from 'react';
 import Element from '../components/Element';
 import { FormContext } from '../FormContext';
 import jsonSkeleton from '../components/elements/jsonSkeleton.json';
 import axios from 'axios';
-import {Modal, Form} from 'react-bootstrap';
+import {Modal, Form, Navbar} from 'react-bootstrap';
 
 
 /*
@@ -267,91 +267,96 @@ function Main() {
 
 
   return (
+    <>
+    <Navbar className="p-3" bg="light" expand="'lg">
+    <Navbar.Brand className="ml-5 h1">2021 Bizflow Project</Navbar.Brand>
+    </Navbar>
     <FormContext.Provider value={{ handleChange }}>
       {/* {onHi()} */}
-    <div className="App">
-      <Container>
-        <FormGroup>
+      <div className="App">
+     
+        <Container>
+          <FormGroup>
             <Label className="mb-3 inputType">Select the Form Element you want to create</Label>
             <Form className="mb-5">
               <Button outline color="danger" onClick={() => addJson(15)} active={rSelected === 15}>Group</Button>{' '}
               <Button outline color="primary" onClick={() => addJson(0)} active={rSelected === 0}>Text</Button>{' '}
-              <Button outline color="primary" onClick={() =>addJson(4)} active={rSelected === 4}>Email</Button>{' '}
-              <Button outline color="primary" onClick={() =>addJson(10)} active={rSelected === 10}>Telephone</Button>{' '}
-              <Button outline color="primary" onClick={() =>addJson(12)} active={rSelected === 12}>Textarea</Button>{' '}
-              <Button outline color="success" onClick={() =>addJson(1)} active={rSelected === 1}>Select</Button>{' '}
-              <Button outline color="success" onClick={() =>addJson(2)} active={rSelected === 2}>Checkbox</Button>{' '}
-              <Button outline color="success" onClick={() =>addJson(13)} active={rSelected === 13}>Radio</Button>{' '}
-              <Button outline color="success" onClick={() =>addJson(9)} active={rSelected === 9}>Number</Button>{' '}
-              <Button outline color="info" onClick={() =>addJson(5)} active={rSelected === 5}>Date</Button>{' '}
-              <Button outline color="info" onClick={() =>addJson(6)} active={rSelected === 6}>Datetime</Button>{' '}
-              <Button outline color="info" onClick={() =>addJson(7)} active={rSelected === 7}>Month</Button>{' '}
-              <Button outline color="warning" onClick={() =>addJson(3)} active={rSelected === 3}>Color</Button>{' '}
-              <Button outline color="warning" onClick={() =>addJson(8)} active={rSelected === 8}>File</Button>{' '}
-              <Button outline color="warning" onClick={() =>addJson(11)} active={rSelected === 11}>Range</Button>{' '}
-              <Button outline color="danger" onClick={() =>addJson(14)} active={rSelected === 14}>Button</Button>{' '}
-              
+              <Button outline color="primary" onClick={() => addJson(4)} active={rSelected === 4}>Email</Button>{' '}
+              <Button outline color="primary" onClick={() => addJson(10)} active={rSelected === 10}>Telephone</Button>{' '}
+              <Button outline color="primary" onClick={() => addJson(12)} active={rSelected === 12}>Textarea</Button>{' '}
+              <Button outline color="success" onClick={() => addJson(1)} active={rSelected === 1}>Select</Button>{' '}
+              <Button outline color="success" onClick={() => addJson(2)} active={rSelected === 2}>Checkbox</Button>{' '}
+              <Button outline color="success" onClick={() => addJson(13)} active={rSelected === 13}>Radio</Button>{' '}
+              <Button outline color="success" onClick={() => addJson(9)} active={rSelected === 9}>Number</Button>{' '}
+              <Button outline color="info" onClick={() => addJson(5)} active={rSelected === 5}>Date</Button>{' '}
+              <Button outline color="info" onClick={() => addJson(6)} active={rSelected === 6}>Datetime</Button>{' '}
+              <Button outline color="info" onClick={() => addJson(7)} active={rSelected === 7}>Month</Button>{' '}
+              <Button outline color="warning" onClick={() => addJson(3)} active={rSelected === 3}>Color</Button>{' '}
+              <Button outline color="warning" onClick={() => addJson(8)} active={rSelected === 8}>File</Button>{' '}
+              <Button outline color="warning" onClick={() => addJson(11)} active={rSelected === 11}>Range</Button>{' '}
+              <Button outline color="danger" onClick={() => addJson(14)} active={rSelected === 14}>Button</Button>{' '}
+
             </Form>
-        </FormGroup>
-      </Container>
-      <div className="editor-container">
-        <div className="editor-box" >
-          <div className="editor-head d-flex justify-content-between p-2" >
-            <Button className="button-reset" aria-label="Reset" onClick={() => {onClickReset()}}><FaRedo /></Button>
-            <h5>JSONSchema</h5>
-            <Button className="button-run" aria-label="Run" onClick={() => {onClickCreate()}}><FaPlay /></Button>
-          </div> 
+          </FormGroup>
+        </Container>
+        <div className="editor-container">
+          <div className="editor-box">
+            <div className="editor-head d-flex justify-content-between p-2">
+              <Button className="button-reset" aria-label="Reset" onClick={() => { onClickReset(); } }><FaRedo /></Button>
+              <h5>JSONSchema</h5>
+              <Button className="button-run" aria-label="Run" onClick={() => { onClickCreate(); } }><FaPlay /></Button>
+            </div>
             <textarea className="json-editor" id="json-editor" value={form} onChange={textChange}>{schema}</textarea>
           </div>
-          <div className="form-box"> 
+          <div className="form-box">
             <div className="new-form">
               <h3>{page_label}</h3>
-              {clicked?
-              <form>
-                <Row>
-                {fields ? fields.map((field, i) => <Element key={i} field={field}/>) : null}
-                </Row>
-              </form>
-              :null} 
-            </div> 
+              {clicked ?
+                <form>
+                  <Row>
+                    {fields ? fields.map((field, i) => <Element key={i} field={field} />) : null}
+                  </Row>
+                </form>
+                : null}
+            </div>
             <Row>
               <Col>
-              <button className="btn btn-large btn-secondary create-btn" onClick={handleShow}>Save</button>
-               {/* <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickSave()}}>Save</button>*/}
+                <button className="btn btn-large btn-secondary create-btn" onClick={handleShow}>Save</button>
+                {/* <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickSave()}}>Save</button>*/}
               </Col>
               <Col>
                 <button className="btn btn-large btn-secondary create-btn" onClick={handleClose}>Download</button>
               </Col>
             </Row>
+          </div>
         </div>
-      </div>
-       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Json 파일 저장하기</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-          <Form.Group className="mb-3" controlId="formBasicText">
-          <Form.Label>Template Name</Form.Label>
-          <Form.Control type="text" placeholder="저장할 파일의 이름을 입력하세요." />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicTextarea">
-          <Form.Label>Template Description</Form.Label>
-          <Form.Control type="textarea" rows="3" placeholder="설명을 입력하세요." />
-        </Form.Group>
-          </Form> 
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Json 파일 저장하기</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group className="mb-3" controlId="formBasicText">
+                <Form.Label>Template Name</Form.Label>
+                <Input type="text" placeholder="저장할 파일의 이름을 입력하세요." />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicTextarea">
+                <Form.Label>Template Description</Form.Label>
+                <Input type="textarea" rows="3" placeholder="설명을 입력하세요." />
+              </Form.Group>
+            </Form>
           </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </div>  
-    </FormContext.Provider>
+          <Modal.Footer>
+            <Button color="secondary" variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button color="primary" variant="primary" onClick={handleClose}>
+              Save
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+    </FormContext.Provider></>
   );
 }
 
