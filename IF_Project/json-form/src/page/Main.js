@@ -1,6 +1,6 @@
 import '../css/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Button, FormGroup, Label, Col, Row, Input} from 'reactstrap';
+import { Container, Button, FormGroup, Label, Col, Row, Input, NavbarBrand} from 'reactstrap';
 import { FaRedo, FaPlay } from 'react-icons/fa';
 import React,{ useState, useEffect, useRef} from 'react';
 import Element from '../components/Element';
@@ -298,6 +298,9 @@ function Main() {
     <FormContext.Provider value={{ handleChange }}>
       {/* {onHi()} */}
       <div className="App">
+        <Navbar bg="light" expand="lg" className="p-3">
+          <Navbar.Brand className="h1 ml-5">2021 Bizflow Project</Navbar.Brand>
+        </Navbar>
      
         <Container className="mb-5 mt-5 container-fluid">
           <Form>
