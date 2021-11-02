@@ -142,7 +142,7 @@ function Main() {
   const handleChange = (ID, event) => {
     const newElements = { ...elements }
     newElements.fields.forEach(field => {
-      const {type,id} = field;
+      const {type, id}= field;
       if (ID === id) {
         switch (type) {
           case 'checkbox':
