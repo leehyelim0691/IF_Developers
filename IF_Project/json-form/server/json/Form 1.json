@@ -1,21 +1,4 @@
 {
     "page_label": "Form 1",
-    "fields": [
-        {
-            "id": "text_1",
-            "label": "Text Label",
-            "placeholder": "Enter your text",
-            "value": "",
-            "width": "half",
-            "type": "text"
-        },
-        {
-            "id": "email_1",
-            "label": "Email Label",
-            "placeholder": "abc@example.com",
-            "value": "",
-            "width": "half",
-            "type": "email"
-        }
-    ]
+    "fields": []
 }
