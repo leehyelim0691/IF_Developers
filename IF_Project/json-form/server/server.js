@@ -12,20 +12,22 @@ app.use('/api/read',api);
 app.use(express.json());
 
 app.post('/api/upload',(req,res)=>{
+  const fileList = fs.readdirSync('./server/json/');
+  // console.log(file);
   console.log(req.body);
   //res.send(req.body);
   const data = JSON.stringify(req.body,null,4);
   const fileName = req.body.fileName;
   fs.writeFileSync("./server/json/"+fileName+".json",data);
-
-  res.send(fs.readFileSync('./server/json/Form 1.json', 'utf-8'));
+  res.send({body:req.body,fileList:fileList});
+  //res.send(req.body);
 });
 
-const file = fs.readFileSync('./server/json/Form 1.json','utf-8');
-console.log(file);
+// const file = fs.readFileSync('./server/json/Form 1.json','utf-8');
+// console.log(file);
 
 app.post('/api/read',(req,res)=>{
-  res.send('file');
+  //res.send('file');
 });
 
 

@@ -9,31 +9,7 @@ import jsonSkeleton from '../components/elements/jsonSkeleton.json';
 import axios from 'axios';
 import {Modal, Form, Navbar} from 'react-bootstrap';
 import Select from 'react-select';
-
-//template 파일 넣기,, 
-const templates = [
-  {value:'template1', label: 'Template1'},
-  {value:'template2', label: 'Template2'},
-  {value:'template3', label: 'Template3'}
-]
-
-
-const LoadTemplate= (t) => {
-   //template 로드 해 오기! 
-}
-
-
-/*
-{
-"page_label": "이력서 Form",
-"group":
-  [
-    "group_name" : ""
-    "fields":[
-    ]
-  ]
-}
- */
+import template1 from './template1.json';
 
 function Main() {
   const [clicked, setClicked] = useState(false);
@@ -46,8 +22,25 @@ function Main() {
   const [count, setCount] = useState(0);
   const [fileName, setFileName] = useState("");
   const [description, setDescription] = useState("");
+  const [{temValue,temLable},{setTemValue,setTemLable}] = useState([{"test":"test"}]);
   const { fields, page_label } = elements ?? {}
   const [error, setError] = useState(null);
+  //template 파일 넣기,, 
+  const templates = [
+    {value:'template1', label: 'Template1'},
+    {value:'template2', label: 'Template2'},
+    {value:'template3', label: 'Template3'}
+  ]
+
+  //const [templates,setTemplates] = useState([{value:'Template1', label: 'Template1'}]);
+
+
+  const LoadTemplate= () => {
+    //template 로드 해 오기!
+    var jsonTxt = JSON.stringify(template1,null, 4);
+    setForm(jsonTxt);
+  }
+
   const [nums, setNums] = useState([
     {
       id: 0,
@@ -148,7 +141,6 @@ function Main() {
     console.log(form);
     var data=JSON.parse(form);
     console.log(data);
-    console.log("fileName",fileName);
 
     axios({
       method: 'post',
@@ -158,6 +150,19 @@ function Main() {
         fileName: fileName,
         description: description
       }
+    }) //성공시 then 실행
+    .then(function (response) {
+      handleClose();
+      console.log("데이터 반환 : ",response);
+      // const temvalue = setTemValue(response.data.fileList);
+      // const temlable = temvalue;
+      //setTemplates(templates.concat({value:fileName,lable:fileName}));
+      console.log("템플릿 리스트 : ",templates)
+      alert("템플릿을 저장하였습니다.");
+    })
+    //실패 시 catch 실행
+    .catch(function (error) {
+      console.log(error);
     });
 
   };
@@ -326,6 +331,7 @@ function Main() {
             <Col className="col-md-11">
               <Select 
               options={templates}
+              onChange={LoadTemplate}
               />
             </Col>
             <Col><Button color="secondary" onclick={() => LoadTemplate()}>Load</Button></Col>
@@ -362,27 +368,6 @@ function Main() {
             </Row>
           </div>
         </div>
-        <div className="form-box"> 
-          <div className="new-form">
-            <h3>{page_label}</h3>
-            {clicked?
-            <form>
-              <Row>
-              {fields ? fields.map((field, i) => <Element key={i} field={field}/>) : null}
-              </Row>
-            </form>
-            :null} 
-          </div> 
-          <Row>
-            <Col>
-            <button className="btn btn-large btn-secondary create-btn" onClick={handleShow}>Save</button>
-             {/* <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickSave()}}>Save</button>*/}
-            </Col>
-            <Col>
-              <button className="btn btn-large btn-secondary create-btn" onClick={handleClose}>Download</button>
-            </Col>
-          </Row>
-      </div>
     </div>
      <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>

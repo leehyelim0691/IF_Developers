@@ -1,0 +1,99 @@
+{
+	"page_label" : "이력서 Form",
+	"group" : [
+		{
+			"group_name" : "인적사항",
+			"fields" : [
+			 	{
+					"id" : "text_1",
+					"label" : "이름",
+					"placeholder" : "Enter your name",
+					"value" : "",
+					"width" : "half",
+					"type" : "text"	
+                               }
+                                   ,{
+					"id" : "email_1",
+					"label" : "이메일",
+					"placeholder" : "abc@example.com",
+					"value" : "",
+					"width" : "half",
+					"type" : "email"
+				}
+				,{
+					"id" : "tel_1",
+					"label" : "전화번호",
+					"placeholder" : "010-7579-5847",
+					"value" : "",
+					"pattern" : "[0-9]{3}-[0-9]{4}-[0-9]{4}",
+					"width" : "half",
+					"type" : "tel"
+				}
+				,{
+					"id" : "text_2",
+					"label" : "주소",
+					"placeholder" : "Enter your address",
+					"value" : "",
+					"width" : "half",
+					"type" : "text"
+				}
+			]
+		},
+		{
+			"group_name" : "학력사항",
+			"fields" : [
+			 	{
+					"id" : "date_1",
+					"label" : "기간",
+					"value" : "",
+					"min" : "2000-01-01",
+					"max" : "2022-12-12",
+					"width" : "quarter",
+					"type" : "date"
+				}
+			 	,{
+					"id" : "text_4",
+					"label" : "학교명",
+					"placeholder" : "school",
+					"value" : "",
+					"width" : "quarter",
+					"type" : "text"
+				}
+				,{
+					"id" : "text_5",
+					"label" : "전공",
+					"placeholder" : "major",
+					"value" : "",
+					"width" : "quarter",
+					"type" : "text"
+				}
+				,{
+					"id" : "range_1",
+					"label" : "학점",
+					"value" : "",
+					"min" : "0",
+					"max" : "100",
+					"step" : "1",
+					"width" : "full",
+					"type" : "range"
+				}
+			 ]
+		},
+		{
+			"group_name" : "자기소개",
+			"fields" : [
+			 	{
+					"id" : "textarea_1",
+					"label" : "",
+					"placeholder" : "Enter your text",
+					"value" : "",
+					"cols" : "50",
+					"rows" : "10",
+					"maxlength" : "1000",
+					"width" : "full",
+					"type" : "textarea"
+				}
+                          ]
+		}
+	]
+}
