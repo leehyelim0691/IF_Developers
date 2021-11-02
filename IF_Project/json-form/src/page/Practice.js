@@ -1,4 +1,6 @@
 {
+    "title" : "",
+    "description" ; "",
     "page_label": "이력서 Form",
     "group": [
         {
