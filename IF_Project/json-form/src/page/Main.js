@@ -8,6 +8,19 @@ import { FormContext } from '../FormContext';
 import jsonSkeleton from '../components/elements/jsonSkeleton.json';
 import axios from 'axios';
 import {Modal, Form, Navbar} from 'react-bootstrap';
+import Select from 'react-select';
+
+//template 파일 넣기,, 
+const templates = [
+  {value:'template1', label: 'Template1'},
+  {value:'template2', label: 'Template2'},
+  {value:'template3', label: 'Template3'}
+]
+
+
+const LoadTemplate= (t) => {
+   //template 로드 해 오기! 
+}
 
 
 /*
@@ -275,10 +288,10 @@ function Main() {
       {/* {onHi()} */}
       <div className="App">
      
-        <Container>
-          <FormGroup>
-            <Label className="mb-3 inputType">Select the Form Element you want to create</Label>
-            <Form className="mb-5">
+        <Container className="mb-5 mt-5 container-fluid">
+          <Form>
+          <Form.Label className="mb-3 inputType">Select the Form Element you want to create</Form.Label>
+            <Form.Group className="mb-3">
               <Button outline color="danger" onClick={() => addJson(15)} active={rSelected === 15}>Group</Button>{' '}
               <Button outline color="primary" onClick={() => addJson(0)} active={rSelected === 0}>Text</Button>{' '}
               <Button outline color="primary" onClick={() => addJson(4)} active={rSelected === 4}>Email</Button>{' '}
@@ -295,9 +308,17 @@ function Main() {
               <Button outline color="warning" onClick={() => addJson(8)} active={rSelected === 8}>File</Button>{' '}
               <Button outline color="warning" onClick={() => addJson(11)} active={rSelected === 11}>Range</Button>{' '}
               <Button outline color="danger" onClick={() => addJson(14)} active={rSelected === 14}>Button</Button>{' '}
-
-            </Form>
-          </FormGroup>
+            </Form.Group>
+          </Form>
+          <Label className="mb-3 inputType">Select your template</Label>
+          <Row>
+            <Col className="col-md-11">
+              <Select 
+              options={templates}
+              />
+            </Col>
+            <Col><Button color="secondary" onclick={() => LoadTemplate()}>Load</Button></Col>
+          </Row>
         </Container>
         <div className="editor-container">
           <div className="editor-box">
