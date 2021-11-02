@@ -9,29 +9,21 @@ import jsonSkeleton from '../components/elements/jsonSkeleton.json';
 import axios from 'axios';
 import {Modal, Form} from 'react-bootstrap';
 
-
-/*
-{
-"page_label": "이력서 Form",
-"group":
-  [
-    "group_name" : ""
-    "fields":[
-    ]
-  ]
-}
- */
-
 function Main() {
   const [clicked, setClicked] = useState(false);
   const [schema,setSchema] = useState();
   const [elements, setElements] = useState(null);
   const ID = 0;
-  const [form, setForm] = useState('{\n\t"page_label" : "이력서 Form",\n\t"group" : [\n\t\t{\n\t\t\t"group_name" : "",\n\t\t\t"fields" : [\n\t\t\t ]\n\t\t}\n\t]\n}');
+  const [form, setForm] = useState('{\n\t"page_label" : "이력서 Form",\n\t"group" : [\n\t\t{\n\t\t\t"group_name" : "Group_1",\n\t\t\t"fields" : [\n\t\t\t ]\n\t\t}\n\t]\n}');
+  // const [form, setForm] = useState('{\n"page_label" : "이력서 Form",\n\t"group" : [\n\t\t{\n\t\t\t"group_name" : "group_1",\n\t\t\t"fields" : [\n\t\t\t ]\n\t\t}\n\t]\n}');
   const [rSelected, setRSelected] = useState(null);
   const [json, setJson] = useState(null);
   const [count, setCount] = useState(0);
-  const { fields, page_label } = elements ?? {}
+  const [groupCount, setGroupCount] = useState(2);
+  const [groupElement, setGroupElement] = useState(0);
+  // const { fields, page_label } = elements ?? {}
+  const { group, fields, page_label } = elements ?? {}
+  // const { group, fields } = elements ?? {}
   const [error, setError] = useState(null);
   const [nums, setNums] = useState([
     {
@@ -143,20 +135,14 @@ function Main() {
     const element = document.createElement("a");
     const file = new Blob([document.getElementById('json-editor').value], {type: 'text/plain'});
     element.href = URL.createObjectURL(file);
-    element.download = formObj.page_label+".txt";
     document.body.appendChild(element); // Required for this to work in FireFox
     element.click();
   };
 
-  const onHi = () => {
-    // alert('hihi');
-  }
-
-
   const handleChange = (ID, event) => {
     const newElements = { ...elements }
     newElements.fields.forEach(field => {
-      const { type, id } = field;
+      const {type,id} = field;
       if (ID === id) {
         switch (type) {
           case 'checkbox':
@@ -182,9 +168,11 @@ function Main() {
       txtArea.selectionFront = selectPos;
       var selectPos = txtValue.length-5;
       var beforeTxt = txtValue.substring(0, selectPos);
-      var addTxt = ',\n\t\t{\n\t\t\t"group_name" : "",\n\t\t\t"fields" : [\n\t\t\t]\n\t\t}';
+      var addTxt = ',\n\t\t{\n\t\t\t"group_name" : "Group_'+groupCount+'",\n\t\t\t"fields" : [\n\t\t\t ]\n\t\t}';
       var afterTxt =   txtValue.substring(selectPos, txtValue.length);
       setForm(beforeTxt + addTxt + afterTxt);
+      setGroupCount(groupCount+1);
+      setGroupElement(1);
     }
     else{
       setNums( 
@@ -197,36 +185,27 @@ function Main() {
         num.id === e ? (json[e].id = json[e].type + '_' + num.id_num) : (json[e].id = json[e].id)
       );
 
+      var jsonLength = Object.keys(json[e]).length;
+      var jsonKeys = Object.keys(json[e]);
+      var jsonValues = Object.values(json[e]);
+
       if(count == 0){
         var txtArea =  document.getElementById('json-editor');
         var txtValue = txtArea.value;
-        // var selectPos = txtValue.length-2;
         var selectPos = txtValue.length-10;
         var beforeTxt = txtValue.substring(0, selectPos);
         var afterTxt = txtValue.substring(txtArea.selectionEnd+txtValue.length-14, txtValue.length);     
         if(afterTxt=='') afterTxt = ']}';  
-        var jsonKeys = Object.keys(json[e]);
-        setForm(jsonKeys);
-        // var jsonLength = Object.keys(json[e]).length;
-        // var jsonTxt = JSON.stringify(json[e],null, 4);
-        // var jsonTxt = JSON.stringify(json[e]);
-        // setForm(jsonTxt);
-
-      //   for (var i = 0; i < jsonLength; i++) {
-      //     addTxt += "\t" + jsonTxt[i];
-      // }
-
-      // var jsonKeys = Object.keys(ObjData);
-      // var addTxt;
-      // for(key in jsonKeys{
-      //   addTxt = key + " : " + json[e][key].first_name+" , last Name :"+data[key].last_name";
-      // }
-
-        var addTxt = JSON.stringify(json[e],null, 4) + '\n'; 
-        // setForm(beforeTxt + addTxt + '\n after is \n'+afterTxt);
+        var addTxt = '\t{';
+        for(var i = 0; i < jsonLength; i++){
+          if(i==jsonLength-1) addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'"\n';
+          else addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'",';
+        }
+        addTxt = addTxt + '\t\t\t\t}\n';
+        var jsonContent = JSON.stringify(json[e],null,4);
         setForm(beforeTxt + addTxt +afterTxt);
+
         txtArea.value = beforeTxt + addTxt + afterTxt;
-        // selectPos = selectPos + addTxt.length;
         txtArea.selectionEnd = selectPos;
       }
       else{
@@ -235,30 +214,44 @@ function Main() {
         var selectPos = txtArea.selectionStart; 
         var check;
         if(selectPos=='') {
-          selectPos = txtValue.length-2;
+          selectPos = txtValue.length-10;
           check = 1;
         }
-        if(txtValue.substring(selectPos-1,selectPos)=='[' || txtValue.substring(selectPos-2,selectPos-1)=='['){
+        if(txtValue.substring(selectPos-1,selectPos)=='}' || txtValue.substring(selectPos-2,selectPos-1)=='['){
           var beforeTxt = txtValue.substring(0, selectPos); 
           var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length);  
-          var addTxt = '\n' + JSON.stringify(json[e],null, 4) + ','+'444'; 
+          var afterTxt = txtValue.substring(txtValue.length-15, txtValue.length);    
+          if(groupElement == 1) var addTxt = '\t{';
+          else var addTxt = '\n\t\t\t\t,{';
+          for(var i = 0; i < jsonLength; i++){
+            if(i==jsonLength-1) addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'"\n';
+            else addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'",';
+          }
+          addTxt = addTxt + '\t\t\t\t}';
           setForm(beforeTxt + addTxt + afterTxt);
           txtArea.value = beforeTxt + addTxt + afterTxt;
           selectPos = selectPos + addTxt.length;
           txtArea.selectionEnd = selectPos; 
         }
         else{
-          var beforeTxt = txtValue.substring(0, selectPos); 
-          if(check==1) var afterTxt=']}';
-          else var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length); 
-          var addTxt = ',' + JSON.stringify(json[e],null, 4)+ '\n'+'555'; 
-          setForm(beforeTxt+addTxt+afterTxt);
+          var beforeTxt = txtValue.substring(0, txtValue.length-10);
+          if(check==1) var afterTxt='\n\t\t\t]\n\t\t}\n\t]\n}';
+          else var afterTxt = txtValue.substring(txtValue.length-15, txtValue.length);    
+          if(groupElement == 1) var addTxt = '\t{';
+          else var addTxt = '\t,{';
+          for(var i = 0; i < jsonLength; i++){
+            if(i==jsonLength-1) addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'"\n';
+            else addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'",';
+          }
+          addTxt = addTxt + '\t\t\t\t}';
+          setForm(beforeTxt  +addTxt +afterTxt);
           txtArea.value = beforeTxt + addTxt + afterTxt;
           selectPos = selectPos + addTxt.length;
           txtArea.selectionEnd = selectPos; 
         }
       }
       setCount(count+1);
+      setGroupElement(0);
     }
   }
 
@@ -270,7 +263,6 @@ function Main() {
 
   return (
     <FormContext.Provider value={{ handleChange }}>
-      {/* {onHi()} */}
     <div className="App">
       <Container>
         <FormGroup>
@@ -310,9 +302,20 @@ function Main() {
               <h3>{page_label}</h3>
               {clicked?
               <form>
-                <Row>
-                {fields ? fields.map((field, i) => <Element key={i} field={field}/>) : null}
-                </Row>
+                 {group.map((group, key) => {
+                   return(
+                    <div key={key}>
+                    <div class="mx-4 my-2 mt-3" >
+                    <label class="form-label font-weight-bold">{group.group_name}</label>
+                    <div class="pt-2 row border">
+                      <Row>
+                        {group.fields ? group.fields.map((field, i) => <Element key={i} field={field}/>) : null}
+                      </Row>
+                      </div>
+                   </div>
+                    </div>
+                   );
+                    })}
               </form>
               :null} 
             </div> 
@@ -358,3 +361,28 @@ function Main() {
 }
 
 export default Main;
+
+
+// tabCont: (
+//   <div>
+//     <h4 class="text-center my-3">Layout Version 1</h4>
+//     <hr></hr>
+//     <div className="new-form" >
+//       {clicked ?
+//         <form>
+//           {group.map((group, key) => {
+//             return (
+//               <div key={key}>
+//                 <div class="mx-4 my-2">
+//                 </div>
+//                 <div class="row m-3 h-auto border">
+//                   {group.fields ? group.fields.map((field, i) => <Element key={i} field={field} />) : null}
+//                 </div>
+//               </div>
+//             );
+//           })}
+//         </form>
+//         : null}
+//     </div>
+//   </div>
+// )
