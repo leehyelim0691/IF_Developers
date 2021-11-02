@@ -7,6 +7,7 @@ import Element from '../components/Element';
 import { FormContext } from '../FormContext';
 import jsonSkeleton from '../components/elements/jsonSkeleton.json';
 import axios from 'axios';
+import {Modal, Form} from 'react-bootstrap';
 
 
 /*
@@ -204,6 +205,8 @@ function Main() {
         var beforeTxt = txtValue.substring(0, selectPos);
         var afterTxt = txtValue.substring(txtArea.selectionEnd+txtValue.length-14, txtValue.length);     
         if(afterTxt=='') afterTxt = ']}';  
+        var jsonKeys = Object.keys(json[e]);
+        setForm(jsonKeys);
         // var jsonLength = Object.keys(json[e]).length;
         // var jsonTxt = JSON.stringify(json[e],null, 4);
         // var jsonTxt = JSON.stringify(json[e]);
