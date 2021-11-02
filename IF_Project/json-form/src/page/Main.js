@@ -1,6 +1,6 @@
 import '../css/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Button, FormGroup, Label, Col, Row, Input } from 'reactstrap';
+import { Container, Button, FormGroup, Label, Col, Row, Input} from 'reactstrap';
 import { FaRedo, FaPlay } from 'react-icons/fa';
 import React,{ useState, useEffect, useRef} from 'react';
 import Element from '../components/Element';
@@ -44,6 +44,8 @@ function Main() {
   const [rSelected, setRSelected] = useState(null);
   const [json, setJson] = useState(null);
   const [count, setCount] = useState(0);
+  const [fileName, setFileName] = useState("");
+  const [description, setDescription] = useState("");
   const { fields, page_label } = elements ?? {}
   const [error, setError] = useState(null);
   const [nums, setNums] = useState([
@@ -121,6 +123,14 @@ function Main() {
     setForm(e.target.value);
   }
 
+  const handleFileName = (e) => {
+    setFileName(e.target.value);
+  }
+
+  const handleDescription = (e) => {
+    setDescription(e.target.value);
+  }
+
   const onClickCreate = () => {
     var schema = document.getElementById('json-editor').value;
     console.log(schema);
@@ -138,15 +148,16 @@ function Main() {
     console.log(form);
     var data=JSON.parse(form);
     console.log(data);
-    axios.post('http://localhost:3002/api/upload',data)
-    //성공시 then 실행
-    .then(function (response) {
-      console.log(response);
-      alert("데이터를 저장하였습니다.");
-    })
-    //실패 시 catch 실행
-    .catch(function (error) {
-      console.log(error);
+    console.log("fileName",fileName);
+
+    axios({
+      method: 'post',
+      url: 'http://localhost:3002/api/upload',
+      data: {
+        json: data,
+        fileName: fileName,
+        description: description
+      }
     });
 
   };
@@ -274,16 +285,16 @@ function Main() {
   }
 
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    setFileName("");
+    setDescription("");
+  };
   const handleShow = () => setShow(true);
 
 
 
   return (
-    <>
-    <Navbar className="p-3" bg="light" expand="'lg">
-    <Navbar.Brand className="ml-5 h1">2021 Bizflow Project</Navbar.Brand>
-    </Navbar>
     <FormContext.Provider value={{ handleChange }}>
       {/* {onHi()} */}
       <div className="App">
@@ -351,33 +362,54 @@ function Main() {
             </Row>
           </div>
         </div>
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Json 파일 저장하기</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form>
-              <Form.Group className="mb-3" controlId="formBasicText">
-                <Form.Label>Template Name</Form.Label>
-                <Input type="text" placeholder="저장할 파일의 이름을 입력하세요." />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicTextarea">
-                <Form.Label>Template Description</Form.Label>
-                <Input type="textarea" rows="3" placeholder="설명을 입력하세요." />
-              </Form.Group>
-            </Form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button color="secondary" variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button color="primary" variant="primary" onClick={handleClose}>
-              Save
-            </Button>
-          </Modal.Footer>
-        </Modal>
+        <div className="form-box"> 
+          <div className="new-form">
+            <h3>{page_label}</h3>
+            {clicked?
+            <form>
+              <Row>
+              {fields ? fields.map((field, i) => <Element key={i} field={field}/>) : null}
+              </Row>
+            </form>
+            :null} 
+          </div> 
+          <Row>
+            <Col>
+            <button className="btn btn-large btn-secondary create-btn" onClick={handleShow}>Save</button>
+             {/* <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickSave()}}>Save</button>*/}
+            </Col>
+            <Col>
+              <button className="btn btn-large btn-secondary create-btn" onClick={handleClose}>Download</button>
+            </Col>
+          </Row>
       </div>
-    </FormContext.Provider></>
+    </div>
+     <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Json 파일 저장하기</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form>
+        <Form.Group className="mb-3" controlId="formBasicText">
+        <Form.Label>Template Name</Form.Label>
+        <Input type="text" placeholder="저장할 파일의 이름을 입력하세요." value={fileName} onChange={handleFileName}/>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicTextarea">
+        <Form.Label>Template Description</Form.Label>
+        <Input type="textarea" rows="3" placeholder="설명을 입력하세요." value={description} onChange={handleDescription} />
+      </Form.Group>
+        </Form> 
+        </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+          Close
+        </Button>
+        <Button variant="primary" onClick={onClickSave}>
+          Save
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  </FormContext.Provider>
   );
 }
 
