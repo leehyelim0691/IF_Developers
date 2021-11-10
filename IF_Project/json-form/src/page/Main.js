@@ -364,17 +364,12 @@ function Main() {
         </FormGroup>
         <Label className="mb-3 inputType">Select your template</Label>
           <Row className="mb-4">
-<<<<<<< HEAD
-            <Col>
-              <Select 
-=======
             <Col className="col-md-11">
               {/* <Select 
->>>>>>> 355123dfd96b494a536f3e134c762cae4c578df9
               options={templates}
               onChange={() => LoadTemplate(templates)}
               /> */}
-              <select className = "selectTest" onChange = {LoadTemplate} value={Selected}>
+              <select className = "selectTest form-control p-2" onChange = {LoadTemplate} value={Selected}>
                 {templates.map((item,index)=>(
                   <option value ={item} key={item}>
                     {item}
