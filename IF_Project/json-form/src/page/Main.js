@@ -339,19 +339,17 @@ function Main() {
               <Button outline color="warning" onClick={() =>addJson(3)} active={rSelected === 3}>Color</Button>{' '}
               <Button outline color="warning" onClick={() =>addJson(8)} active={rSelected === 8}>File</Button>{' '}
               <Button outline color="warning" onClick={() =>addJson(11)} active={rSelected === 11}>Range</Button>{' '}
-              <Button outline color="danger" onClick={() =>addJson(14)} active={rSelected === 14}>Button</Button>{' '}
-              
+              <Button outline color="danger" onClick={() =>addJson(14)} active={rSelected === 14}>Button</Button>{' '} 
             </Form>
         </FormGroup>
         <Label className="mb-3 inputType">Select your template</Label>
           <Row className="mb-4">
-            <Col className="col-md-11">
+            <Col>
               <Select 
               options={templates}
               onChange={LoadTemplate}
               />
             </Col>
-            <Col><Button color="secondary" onclick={() => LoadTemplate()}>Load</Button></Col>
           </Row>
 
       </Container>
