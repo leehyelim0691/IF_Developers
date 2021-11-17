@@ -11,17 +11,6 @@ import {Modal, Form, Navbar} from 'react-bootstrap';
 import Select from 'react-select';
 import template1 from './template1.json';
 
-const templates = [
-  {value:'template1', label: 'Template1'},
-  {value:'template2', label: 'Template2'},
-  {value:'template3', label: 'Template3'}
-]
-
-
-const LoadTemplate= () => {
-  //template 로드 해 오기! 
-}
-
 function Main() {
   //template 파일 넣기,, 
   const [clicked, setClicked] = useState(false);
@@ -34,25 +23,57 @@ function Main() {
   const [count, setCount] = useState(0);
   const [fileName, setFileName] = useState("");
   const [description, setDescription] = useState("");
-  const [{temValue,temLable},{setTemValue,setTemLable}] = useState([{"test":"test"}]);
   const [groupCount, setGroupCount] = useState(2);
   const [groupElement, setGroupElement] = useState(0);
   const { group, fields, page_label } = elements ?? {}
   const [error, setError] = useState(null);
   //template 파일 넣기,, 
-  const templates = [
-    {value:'template1', label: 'Template1'},
-    {value:'template2', label: 'Template2'},
-    {value:'template3', label: 'Template3'}
-  ]
+  const [templates,setTemplates] = useState([
+  ]);
 
-  //const [templates,setTemplates] = useState([{value:'Template1', label: 'Template1'}]);
+  const [Selected, setSelected] = useState("");
 
+  React.useEffect(() => {
+    axios.get('http://localhost:3002/api/read')
+    //성공시 then 실행
+    .then(function (response) {
+      console.log(response);
+      console.log(response.data)
+      setTemplates(response.data);
+      return {templates};
+    })
+    //실패 시 catch 실행
+    .catch(function (error) {
+      console.log(error);
+    });
+  }, []);
 
-  const LoadTemplate= () => {
+  const LoadTemplate= (e) => {
     //template 로드 해 오기!
-    var jsonTxt = JSON.stringify(template1,null, 4);
-    setForm(jsonTxt);
+    var test = document.getElementsByClassName("selectTest");
+    // test 변수에 selectTest란 클래스명을 가진 요소를 저장
+
+    var indexNo = test[0].selectedIndex;
+    // test 변수의 선택된 값을 indexNo에 저장
+
+    console.log("인덱스 넘버",indexNo);
+    setSelected(e.target.value);
+
+    axios({
+      method: 'post',
+      url: 'http://localhost:3002/api/select',
+      data: {
+        fileIndex: indexNo
+      }
+    }).then(function (response) {
+      console.log(response.data.json);
+      var jsonTxt = JSON.stringify(response.data.json,null, 4);
+      setForm(jsonTxt);
+    })
+    //실패 시 catch 실행
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
   const [nums, setNums] = useState([
@@ -168,9 +189,8 @@ function Main() {
     .then(function (response) {
       handleClose();
       console.log("데이터 반환 : ",response);
-      // const temvalue = setTemValue(response.data.fileList);
-      // const temlable = temvalue;
-      //setTemplates(templates.concat({value:fileName,lable:fileName}));
+
+      setTemplates(templates.concat(fileName));
       console.log("템플릿 리스트 : ",templates)
       alert("템플릿을 저장하였습니다.");
     })
@@ -186,6 +206,7 @@ function Main() {
     const element = document.createElement("a");
     const file = new Blob([document.getElementById('json-editor').value], {type: 'text/plain'});
     element.href = URL.createObjectURL(file);
+    //document.body.appendChild(element); // Required for this to work in FireFox
     element.download = formObj.page_label+'.json';
     element.click();
   };
@@ -383,19 +404,24 @@ function Main() {
               <Button outline color="warning" onClick={() =>addJson(3)} active={rSelected === 3}>Color</Button>{' '}
               <Button outline color="warning" onClick={() =>addJson(8)} active={rSelected === 8}>File</Button>{' '}
               <Button outline color="warning" onClick={() =>addJson(11)} active={rSelected === 11}>Range</Button>{' '}
-              <Button outline color="danger" onClick={() =>addJson(14)} active={rSelected === 14}>Button</Button>{' '}
-              
+              <Button outline color="danger" onClick={() =>addJson(14)} active={rSelected === 14}>Button</Button>{' '} 
             </Form>
         </FormGroup>
         <Label className="mb-3 inputType">Select your template</Label>
           <Row className="mb-4">
             <Col className="col-md-11">
-              <Select 
+              {/* <Select 
               options={templates}
-              onChange={LoadTemplate}
-              />
+              onChange={() => LoadTemplate(templates)}
+              /> */}
+              <select className = "selectTest form-control p-2" onChange = {LoadTemplate} value={Selected}>
+                {templates.map((item,index)=>(
+                  <option value ={item} key={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
             </Col>
-            <Col><Button color="secondary" onclick={() => LoadTemplate()}>Load</Button></Col>
           </Row>
 
       </Container>
