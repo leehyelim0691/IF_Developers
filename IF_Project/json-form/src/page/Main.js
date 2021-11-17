@@ -29,7 +29,6 @@ function Main() {
   const [elements, setElements] = useState(null);
   const ID = 0;
   const [form, setForm] = useState('{\n\t"page_label" : "이력서 Form",\n\t"group" : [\n\t\t{\n\t\t\t"group_name" : "Group_1",\n\t\t\t"fields" : [\n\t\t\t ]\n\t\t}\n\t]\n}');
-  // const [form, setForm] = useState('{\n"page_label" : "이력서 Form",\n\t"group" : [\n\t\t{\n\t\t\t"group_name" : "group_1",\n\t\t\t"fields" : [\n\t\t\t ]\n\t\t}\n\t]\n}');
   const [rSelected, setRSelected] = useState(null);
   const [json, setJson] = useState(null);
   const [count, setCount] = useState(0);
@@ -38,7 +37,6 @@ function Main() {
   const [{temValue,temLable},{setTemValue,setTemLable}] = useState([{"test":"test"}]);
   const [groupCount, setGroupCount] = useState(2);
   const [groupElement, setGroupElement] = useState(0);
-  // const { fields, page_label } = elements ?? {}
   const { group, fields, page_label } = elements ?? {}
   const [error, setError] = useState(null);
   //template 파일 넣기,, 
@@ -149,7 +147,7 @@ function Main() {
   };
   
   const onClickReset = () => {
-    setForm('{\n"page_label": "이력서 Form",\n"fields": [\n ]}');
+    setForm('{\n\t"page_label" : "이력서 Form",\n\t"group" : [\n\t\t{\n\t\t\t"group_name" : "Group_1",\n\t\t\t"fields" : [\n\t\t\t ]\n\t\t}\n\t]\n}');
     setCount(0);
   };
 
@@ -188,7 +186,7 @@ function Main() {
     const element = document.createElement("a");
     const file = new Blob([document.getElementById('json-editor').value], {type: 'text/plain'});
     element.href = URL.createObjectURL(file);
-    document.body.appendChild(element); // Required for this to work in FireFox
+    element.download = formObj.page_label+'.json';
     element.click();
   };
 
@@ -241,41 +239,31 @@ function Main() {
       var jsonLength = Object.keys(json[e]).length;
       var jsonKeys = Object.keys(json[e]);
       var jsonValues = Object.values(json[e]);
+      var txtArea =  document.getElementById('json-editor');
+      var txtValue = txtArea.value;
+      txtArea.selectionEnd = selectPos;
 
-      if(count == 0){
-        var txtArea =  document.getElementById('json-editor');
-        var txtValue = txtArea.value;
-        var selectPos = txtValue.length-10;
-        var beforeTxt = txtValue.substring(0, selectPos);
-        var afterTxt = txtValue.substring(txtArea.selectionEnd+txtValue.length-14, txtValue.length);     
-        if(afterTxt=='') afterTxt = ']}';  
-        var addTxt = '\t{';
-        for(var i = 0; i < jsonLength; i++){
-          if(i==jsonLength-1) addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'"\n';
-          else addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'",';
-        }
-        addTxt = addTxt + '\t\t\t\t}\n';
-        var jsonContent = JSON.stringify(json[e],null,4);
-        setForm(beforeTxt + addTxt +afterTxt);
+      if(txtArea.selectionEnd != 0){
+        var beforeTxt = txtValue.substring(0, txtArea.selectionEnd);
+         var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length);
+         if(afterTxt=='') afterTxt = ']}';  
+         if(count == 0) var addTxt = '\n\t\t\t\t{';
+         else var addTxt = '\n\t\t\t\t,{';
+          for(var i = 0; i < jsonLength; i++){
+            if(i==jsonLength-1) addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'"\n';
+            else addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'",';
+          }
+          addTxt = addTxt + '\t\t\t\t}\n';
+          setForm(beforeTxt + addTxt +afterTxt);
+          txtArea.selectionEnd = selectPos;
 
-        txtArea.value = beforeTxt + addTxt + afterTxt;
-        txtArea.selectionEnd = selectPos;
       }
       else{
-        var txtArea =  document.getElementById('json-editor');
-        var txtValue = txtArea.value;
-        var selectPos = txtArea.selectionStart; 
-        var check;
-        if(selectPos=='') {
-          selectPos = txtValue.length-10;
-          check = 1;
-        }
-        if(txtValue.substring(selectPos-1,selectPos)=='}' || txtValue.substring(selectPos-2,selectPos-1)=='['){
+        if(txtValue.substring(selectPos-1,selectPos)=='[' || txtValue.substring(selectPos-2,selectPos-1)=='['){
           var beforeTxt = txtValue.substring(0, selectPos); 
           var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length);  
           var afterTxt = txtValue.substring(txtValue.length-15, txtValue.length);    
-          if(groupElement == 1) var addTxt = '\t{';
-          else var addTxt = '\n\t\t\t\t,{';
+          var addTxt = '\n\t\t\t\t{';
           for(var i = 0; i < jsonLength; i++){
             if(i==jsonLength-1) addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'"\n';
             else addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'",';
@@ -286,26 +274,82 @@ function Main() {
           selectPos = selectPos + addTxt.length;
           txtArea.selectionEnd = selectPos; 
         }
-        else{
-          var beforeTxt = txtValue.substring(0, txtValue.length-10);
-          if(check==1) var afterTxt='\n\t\t\t]\n\t\t}\n\t]\n}';
-          else var afterTxt = txtValue.substring(txtValue.length-15, txtValue.length);    
-          if(groupElement == 1) var addTxt = '\t{';
-          else var addTxt = '\t,{';
+        else if(count == 0){
+          var selectPos = txtValue.length-10;
+          var beforeTxt = txtValue.substring(0, selectPos);
+          var afterTxt = txtValue.substring(txtArea.selectionEnd+txtValue.length-14, txtValue.length); 
+          if(afterTxt=='') afterTxt = ']}';  
+          var addTxt = '\t{';
           for(var i = 0; i < jsonLength; i++){
             if(i==jsonLength-1) addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'"\n';
             else addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'",';
           }
-          addTxt = addTxt + '\t\t\t\t}';
-          setForm(beforeTxt  +addTxt +afterTxt);
+          addTxt = addTxt + '\t\t\t\t}\n';
+          setForm(beforeTxt + addTxt +afterTxt);
+          txtArea.value = beforeTxt + addTxt + afterTxt;
+          txtArea.selectionEnd = selectPos;
+        }
+        else if(groupElement == 1){
+          var selectPos = txtValue.length-10;
+          var beforeTxt = txtValue.substring(0, selectPos);
+          var afterTxt = txtValue.substring(selectPos, txtValue.length); 
+          var addTxt = '\t{';
+          for(var i = 0; i < jsonLength; i++){
+            if(i==jsonLength-1) addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'"\n';
+            else addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'",';
+          }
+          addTxt = addTxt + '\t\t\t\t}\n\t\t\t';
+          setForm(beforeTxt + addTxt + afterTxt);
           txtArea.value = beforeTxt + addTxt + afterTxt;
           selectPos = selectPos + addTxt.length;
           txtArea.selectionEnd = selectPos; 
         }
-      }
-      setCount(count+1);
+        else{
+          var txtArea =  document.getElementById('json-editor');
+          var txtValue = txtArea.value;
+          var selectPos = txtArea.selectionStart; 
+          var check;
+          if(selectPos=='') {
+            selectPos = txtValue.length-10;
+            check = 1;
+          }
+          if(txtValue.substring(selectPos-1,selectPos)=='}' || txtValue.substring(selectPos-2,selectPos-1)=='['){
+            var beforeTxt = txtValue.substring(0, selectPos); 
+            var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length);  
+            var afterTxt = txtValue.substring(txtValue.length-15, txtValue.length);    
+            if(groupElement == 1) var addTxt = '\t{';
+            else var addTxt = '\n\t\t\t\t,{';
+            for(var i = 0; i < jsonLength; i++){
+              if(i==jsonLength-1) addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'"\n';
+              else addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'",';
+            }
+            addTxt = addTxt + '\t\t\t\t}';
+            setForm(beforeTxt + addTxt + afterTxt);
+            txtArea.value = beforeTxt + addTxt + afterTxt;
+            selectPos = selectPos + addTxt.length;
+            txtArea.selectionEnd = selectPos; 
+          }
+          else{
+            var beforeTxt = txtValue.substring(0, txtValue.length-10);
+            if(check==1) var afterTxt='\n\t\t\t]\n\t\t}\n\t]\n}';
+            else var afterTxt = txtValue.substring(txtValue.length-14, txtValue.length);    
+            if(groupElement == 1) var addTxt = '\t{';
+            else var addTxt = '\t,{';
+            for(var i = 0; i < jsonLength; i++){
+              if(i==jsonLength-1) addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'"\n';
+              else addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'",';
+            }
+            addTxt = addTxt + '\t\t\t\t}\n';
+            setForm(beforeTxt  +addTxt + afterTxt);
+            txtArea.value = beforeTxt + addTxt + afterTxt;
+            selectPos = selectPos + addTxt.length;
+            txtArea.selectionEnd = selectPos; 
+          }
+        }
+      }  
       setGroupElement(0);
     }
+    setCount(count+1);
   }
 
   const [show, setShow] = useState(false);
@@ -389,10 +433,9 @@ function Main() {
             <Row>
               <Col>
               <button className="btn btn-large btn-secondary create-btn" onClick={handleShow}>Save</button>
-               {/* <button className="btn btn-large btn-secondary create-btn" onClick={() => {onClickSave()}}>Save</button>*/}
               </Col>
               <Col>
-                <button className="btn btn-large btn-secondary create-btn" onClick={handleClose}>Download</button>
+                <button className="btn btn-large btn-secondary create-btn" onClick={onClickDownload}>Download</button>
               </Col>
             </Row>
         </div>
@@ -428,28 +471,3 @@ function Main() {
 }
 
 export default Main;
-
-
-// tabCont: (
-//   <div>
-//     <h4 class="text-center my-3">Layout Version 1</h4>
-//     <hr></hr>
-//     <div className="new-form" >
-//       {clicked ?
-//         <form>
-//           {group.map((group, key) => {
-//             return (
-//               <div key={key}>
-//                 <div class="mx-4 my-2">
-//                 </div>
-//                 <div class="row m-3 h-auto border">
-//                   {group.fields ? group.fields.map((field, i) => <Element key={i} field={field} />) : null}
-//                 </div>
-//               </div>
-//             );
-//           })}
-//         </form>
-//         : null}
-//     </div>
-//   </div>
-// )

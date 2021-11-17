@@ -1,0 +1,95 @@
+  
+.form{
+    height: 100vh;
+    background-image:url("./../image/start.png") ;
+    background-repeat : no-repeat;
+    background-size : cover; 
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+.header1{
+    font-family: 'Times New Roman', Times, serif;
+    font-size : 20px !important;
+    padding : 20px;
+    font-weight: 200 !important;
+    display: inline-block;
+}
+.menu{
+    display: flex;
+    justify-content: space-between;
+}
+.menu1{
+    font-family: 'Times New Roman', Times, serif;
+    font-size : 20px !important;
+    padding : 20px;
+    font-weight: 200 !important;
+    display: inline;
+}
+.menu2{
+    display: inline;
+    font-family: 'Times New Roman', Times, serif;
+    font-size : 20px !important;
+    padding : 20px;
+    font-weight: 200 !important;
+}
+.body_content{
+    font-size : 100px;
+}
+h1{
+    font-family: 'Times New Roman', Times, serif;
+    position : absolute;
+    top : 37%;
+    left : 14%;
+    
+    font-weight : bold !important; 
+    font-size : 60px !important; 
+}
+h6{
+    font-family : 'Times New Roman', Times, serif;
+    font-size : 23px !important;
+    font-weight : 500 !important;
+    position : absolute;
+    top : 55%;
+    left : 15%;
+}
+.data_title{
+    font-family : 'Times New Roman', Times, serif;
+    font-size : 18px !important;
+    font-weight : 700 !important;
+    position : absolute;
+    top : 50%;
+    right : 11%;
+}
+.data_content{
+    font-family : 'Times New Roman', Times, serif;
+    font-size : 18px !important;
+    /* font-weight : 500 !important; */
+    font-weight : bold !important;
+    position : absolute;
+    top : 53%;
+    right : 11%;
+    /* margin-bottom : -5px; */
+}
+/* .btn{
+    border: 1px solid #BC7B7A;
+} */
+.main_btn{
+    position : absolute;
+    top : 87%;
+    left : 44%;
+    color : white;
+    font-family : 'Times New Roman', Times, serif;
+    font-size : 23px !important;
+    font-weight : 300 !important;
+    background-color: #BC7171 !important;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 4%;
+    padding-right: 4%;
+    border :none;
+}
+.main_btn:hover{
+    background-color: #A7676A !important;
+}
