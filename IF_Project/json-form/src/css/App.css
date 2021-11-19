@@ -62,11 +62,7 @@
   padding: 5px;
 }
 
-.button-run{
-  background-color: transparent !important;
-  border-color: transparent !important;
-  color: green! important;
-}
+
 .button-reset{
   background-color: transparent !important;
   border-color: transparent !important;
