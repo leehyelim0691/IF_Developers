@@ -88,7 +88,7 @@ button:focus {
 
 .json-container{
     float:left;
-    height: 85%;
+    height: 650px;
     width: 50%;
     background-color: #b27473;
     display:flex;
@@ -162,7 +162,7 @@ hr{
 .form-container{
     display:block;
     width: 100%;
-    height: 850px;
+    height: 650px;
     background-color:white;
 }
 
@@ -170,7 +170,7 @@ hr{
     padding: 20px 40px;
     border:1px solid lightgray;
     margin: 2rem;
-    height: 780px;
+    height: 580px;
     overflow-y: scroll;
 }
 
@@ -182,6 +182,13 @@ hr{
     justify-content: end;
     align-items: center;
 }
+
+.button-run{
+    background-color: transparent !important;
+    border-color: transparent !important;
+    color: black! important;
+  }
+
 .save{
     width: 250px;
     color: black !important;
