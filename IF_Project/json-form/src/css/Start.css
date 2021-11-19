@@ -37,11 +37,50 @@
 .body_content{
     font-size : 100px;
 }
+
+.body{
+    position:absolute;
+    top:350px;
+    animation-duration: 1.5s;
+    animation-name:slidein;
+    animation-fill-mode: forwards;
+}
+
+.data{
+    position:absolute;
+    top:400px;
+    animation-duration: 1.5s;
+    animation-name:slideinData;
+    animation-fill-mode: forwards;
+    right : 13%;
+}
+
+@keyframes slidein{
+from {
+        margin-left: -200px;
+
+    }
+
+    to {
+        margin-left: 13%;
+    }
+}
+
+@keyframes slideinData{
+    0% {
+        right:-100px;
+        }
+    100% {
+        right:190px;
+    }
+}
+
+
 h1{
     font-family: 'Times New Roman', Times, serif;
-    position : absolute;
+    /* position : absolute;
     top : 37%;
-    left : 14%;
+    left : 14%; */
     
     font-weight : bold !important; 
     font-size : 60px !important; 
@@ -50,26 +89,26 @@ h6{
     font-family : 'Times New Roman', Times, serif;
     font-size : 23px !important;
     font-weight : 500 !important;
-    position : absolute;
-    top : 55%;
-    left : 15%;
+    /* position : absolute;
+    top : 75%;
+    left : 15%; */
 }
 .data_title{
     font-family : 'Times New Roman', Times, serif;
     font-size : 18px !important;
     font-weight : 700 !important;
-    position : absolute;
+    /* position : absolute;
     top : 50%;
-    right : 11%;
+    right : 11%; */
 }
 .data_content{
     font-family : 'Times New Roman', Times, serif;
     font-size : 18px !important;
     /* font-weight : 500 !important; */
-    font-weight : bold !important;
+    /* font-weight : bold !important;
     position : absolute;
     top : 53%;
-    right : 11%;
+    right : 11%; */
     /* margin-bottom : -5px; */
 }
 /* .btn{
