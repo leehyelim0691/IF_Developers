@@ -32,6 +32,7 @@ function Main() {
   ]);
 
   const [Selected, setSelected] = useState("");
+ 
 
   React.useEffect(() => {
     axios.get('http://localhost:3002/api/read')
@@ -52,6 +53,8 @@ function Main() {
     //template 로드 해 오기!
     var test = document.getElementsByClassName("selectTest");
     // test 변수에 selectTest란 클래스명을 가진 요소를 저장
+
+    console.log("test", test);
 
     var indexNo = test[0].selectedIndex;
     // test 변수의 선택된 값을 indexNo에 저장

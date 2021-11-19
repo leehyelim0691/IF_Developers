@@ -2,7 +2,7 @@ import './css/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import Main from './page/Main.js';
-import Form from './page/Form.js';
+import FormPage from './page/Form.js';
 import Start from './page/Start.js';
 import { Route, Switch, BrowserRouter, Routes } from 'react-router-dom';
 
@@ -11,7 +11,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Start />} />
-        <Route path="/form" element={<Form />} />
+        <Route path="/form" element={<FormPage />} />
+        <Route path="/main" element={<Main />} />
       </Routes>
     </BrowserRouter>
   );

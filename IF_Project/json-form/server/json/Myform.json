@@ -1,0 +1,50 @@
+{
+    "json": {
+        "page_label": "my form",
+        "group": [
+            {
+                "group_name": "Group_1",
+                "fields": [
+                    {
+                        "id": "text_1",
+                        "label": "Text Label",
+                        "placeholder": "Enter your text",
+                        "value": "",
+                        "width": "half",
+                        "type": "text"
+                    },
+                    {
+                        "id": "email_1",
+                        "label": "Email Label",
+                        "placeholder": "abc@example.com",
+                        "value": "",
+                        "width": "half",
+                        "type": "email"
+                    },
+                    {
+                        "id": "tel_1",
+                        "label": "Telephone Label",
+                        "placeholder": "010-7579-5847",
+                        "value": "",
+                        "pattern": "[0-9]{3}-[0-9]{4}-[0-9]{4}",
+                        "width": "half",
+                        "type": "tel"
+                    },
+                    {
+                        "id": "textarea_1",
+                        "label": "TextArea Label",
+                        "placeholder": "Enter your text",
+                        "value": "",
+                        "cols": "50",
+                        "rows": "10",
+                        "maxlength": "1000",
+                        "width": "full",
+                        "type": "textarea"
+                    }
+                ]
+            }
+        ]
+    },
+    "fileName": "Myform",
+    "description": "Myform"
+}

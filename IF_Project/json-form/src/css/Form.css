@@ -1,0 +1,263 @@
+html,body{
+    height: 100%;
+    background-color: #B5AEA8;
+}
+
+a{
+    text-decoration: none !important;
+    color: black !important;
+}
+
+button:focus {
+    outline: none !important;
+    outline-width: 0 !important;
+    box-shadow: none;
+}
+
+.form-body{
+    width: 100%;
+    height: 100vh;
+    background-color: #B5AEA8;
+    justify-content: center;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.button-container{
+    float:left;
+}
+.elements, .templates{
+    margin: 0 2rem;
+}
+
+.button-container button{
+    width: 95px;
+    text-align: end;
+    display:block;
+    padding: 3px 0 !important;
+    background-color: transparent !important;
+    color: black !important;
+    outline: none !important;
+    border: none !important;
+    cursor: pointer !important;
+}
+
+.json-menu{
+    margin-top: 1rem;
+}
+
+.json-menu button{
+        width: 50px;
+        text-align: center;
+        display:block;
+        padding: 5px !important;
+        background-color: transparent !important;
+        color: black !important;
+        outline: none !important;
+        border: none !important;
+        cursor: pointer !important;
+}
+
+
+
+.button-container button label{
+    text-align: right !important;
+}
+
+.element-button{
+    font-size: 16px !important;
+}
+
+.element-button:hover{
+    color: #b27473 !important;
+}
+.element-buttons-heading{
+    text-align: end;
+    text-decoration: underline;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.main-container{
+    width: 100%;
+    height: 100%;
+    display:flex;
+    flex-flow: row;
+}
+
+
+.json-container{
+    float:left;
+    height: 85%;
+    width: 50%;
+    background-color: #b27473;
+    display:flex;
+    flex-flow: row;
+    justify-content: end;
+    
+}
+
+.json-editor-container{
+    width: 95%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    float:left;
+    padding: 0;
+}
+
+.json-editor-header{
+    height:fit-content;
+    background-color: lightgrey;
+    text-align: center;
+}
+
+.editor{
+    width: 100%;
+    flex-grow : 1;
+    background-color: #3e3e3e;
+    resize:none;
+    color: white;
+    padding: 1rem;
+    overflow:auto;
+}
+
+.button-container{
+    padding: 10px !important;
+}
+.open-buttons svg{
+    font-size: 25px;
+    color: black;
+}
+.open-templates svg{
+    margin-top: 1rem;
+    font-size: 25px;
+    color: #3e3e3e;
+}
+
+.open-buttons:hover svg, .open-buttons:focus svg{
+    font-size: 25px;
+    color: #B5AEA8;
+}
+.open-templates:hover svg, .open-templates:focus svg{
+    margin-top: 1rem;
+    font-size: 25px;
+    color: #B5AEA8;
+}
+
+hr{
+    width: 100%;
+    margin: 5px 0 !important;
+}
+
+.right-container{
+    background-color: transparent;
+    height: 100%;
+    width: 90%;
+    flex-grow : 1;
+    margin: 0 2rem;
+    padding:  0  0 4px 0;
+}
+
+.form-container{
+    display:block;
+    width: 100%;
+    height: 850px;
+    background-color:white;
+}
+
+.form-made{
+    padding: 20px 40px;
+    border:1px solid lightgray;
+    margin: 2rem;
+    height: 780px;
+    overflow-y: scroll;
+}
+
+.button-bar{
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-flow: row;
+    justify-content: end;
+    align-items: center;
+}
+.save{
+    width: 250px;
+    color: black !important;
+    background-color: #b27473 !important;
+}
+.save:hover{
+    background-color: #3e3e3e !important;
+    color: white !important;
+}
+.download{
+    width: 250px;
+    color: white !important;
+    background-color: #3e3e3e !important;
+}
+.download:hover{
+    background-color: #b27473 !important;
+    color: black !important;
+}
+
+.modal{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.save-modal{
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 25px;
+    margin-top: 10%;
+    height: 100%;
+    -webkit-animation-name: modal-animation;
+    -webkit-animation-duration: 0.5s;
+    animation-name: modal-animation;
+    animation-duration: 0.5s;
+}
+
+.modal-header{
+    
+    background-color: #b27473;
+}
+
+
+.modal-footer{
+    background-color: #B5AEA8;
+}
+
+
+.closeButton{
+    background-color: #3e3e3e !important;
+}
+.saveButton{
+    background-color: #b27473 !important;
+}
+
+.hidden{
+    display: none !important;
+}
+
+@-webkit-keyframes modal-animation {
+    from {
+        top: -100px;
+        opacity: 0;
+    }
+    to {
+        top: 0px;
+        opacity: 1;
+    }
+}
+  
+@keyframes modal-animation {
+    from {
+        top: -100px;
+        opacity: 0;
+    }
+    to {
+        top: 0px;
+        opacity: 1;
+    }
+}

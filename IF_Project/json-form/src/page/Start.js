@@ -27,7 +27,7 @@ function Start() {
              <div className = "data_title"><p>[Your data]</p></div>
              <div className = "data_content"><p>Name<br/>Age<br/>Sex<br/>School<br/>Experience<br/>Hobby<br/>Strength<br/>.<br/>.<br/>.</p></div>
          </div>
-         <Link to="/main"><button className="main_btn" type="submit">Get Started</button></Link>
+         <Link to="/form"><button className="main_btn" type="submit">Get Started</button></Link>
       </div>
   );
 }
