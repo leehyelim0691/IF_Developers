@@ -25,9 +25,19 @@ button:focus {
 
 .button-container{
     float:left;
+    animation: fadein 2s;
 }
 .elements, .templates{
     margin: 0 2rem;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .button-container button{
