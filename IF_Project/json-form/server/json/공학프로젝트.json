@@ -1,6 +1,6 @@
 {
     "json": {
-        "page_label": "이력서 Form",
+        "page_label": "공프기 Form",
         "group": [
             {
                 "group_name": "Group_1",
@@ -45,6 +45,6 @@
             }
         ]
     },
-    "fileName": "",
-    "description": ""
+    "fileName": "공학프로젝트",
+    "description": "공학프로젝트 입문 사용자의 정보를 입력 받는 Form "
 }

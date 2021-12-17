@@ -14,14 +14,6 @@
                         "type": "text"
                     },
                     {
-                        "id": "email_1",
-                        "label": "Email Label",
-                        "placeholder": "abc@example.com",
-                        "value": "",
-                        "width": "half",
-                        "type": "email"
-                    },
-                    {
                         "id": "tel_1",
                         "label": "Telephone Label",
                         "placeholder": "010-7579-5847",
@@ -31,7 +23,14 @@
                         "type": "tel"
                     },
                     {
-                        "id": "textarea_1",
+                        "id": "checkbox_1",
+                        "label": "Checkbox Label",
+                        "value": "",
+                        "width": "full",
+                        "type": "checkbox"
+                    },
+                    {
+                        "id": "textarea_2",
                         "label": "TextArea Label",
                         "placeholder": "Enter your text",
                         "value": "",
@@ -45,6 +44,6 @@
             }
         ]
     },
-    "fileName": "",
-    "description": ""
+    "fileName": "Hello",
+    "description": "hello"
 }
