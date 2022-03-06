@@ -26,6 +26,9 @@ i.사용자로부터 버튼을 이용해 Form 요소를 불러 오고, Json 데�
 ii. 구성된 Json 형식을 토대로 Form 생성
 iii. 해당 Form을 Template 으로 저장 및 다운로드
 
+<img width="1057" src="https://ifh.cc/g/vrDdFc.png">
+
+
 
 ## 기술 스택
  * React 17.0.2
@@ -44,6 +47,27 @@ iii. 해당 Form을 Template 으로 저장 및 다운로드
 • 사용자로부터 버튼을 이용해 Library에서 Form 요소를 받아 해당 Custom Json Format을 불러옴.
 • Custom Json Format의 속성을 사용자의 필요에 따라 수정을 가능하게 함.
 
-<img width="1057" src="https://ifh.cc/g/vrDdFc.png">
- 
+<img width="500" src="https://ifh.cc/g/x8JkHC.jpg">
+1. 시작화면
+- 시작버튼을 누르면 Form 제작 화면으로 넘어갈 수 있다.
+
+<img width="500" src="https://ifh.cc/g/9yJsYC.jpg">
+2. 메인화면
+- 왼쪽의 버튼을 눌러 Form의 Component를 생성할 수 있다.
+
+<img width="500" src="https://ifh.cc/g/rdFeAQ.jpg">
+3. Form Preview
+- 생성된 Component의 Form을 확인할 수 있다.
+
+<img width="500" src="https://ifh.cc/g/haHREm.jpg">
+4. Template 저장
+- 만들어진 Form을 Template으로 저장해 재사용할 수 있다.
+
+<img width="500" src="https://ifh.cc/g/eGCrP9.jpg">
+5. Template 불러오기
+- 저장된 Template을 눌러 Form을 불러 올 수 있다.
+
+<img width="500" src="https://ifh.cc/g/am4TJg.jpg">
+6. Template 다운로드
+원하는 Form을 Json Format으로 로컬에 다운로드 할 수 있다.
 
