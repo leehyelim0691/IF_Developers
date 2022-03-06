@@ -44,6 +44,6 @@ iii. 해당 Form을 Template 으로 저장 및 다운로드
 • 사용자로부터 버튼을 이용해 Library에서 Form 요소를 받아 해당 Custom Json Format을 불러옴.
 • Custom Json Format의 속성을 사용자의 필요에 따라 수정을 가능하게 함.
 
-<img width="1057 src="https://ifh.cc/g/vrDdFc.png">
+<img width="1057" src="https://ifh.cc/g/vrDdFc.png">
  
 
