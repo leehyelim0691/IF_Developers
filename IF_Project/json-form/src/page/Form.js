@@ -301,86 +301,127 @@ function FormPage() {
       var jsonLength = Object.keys(json[e]).length;
       var jsonKeys = Object.keys(json[e]);
       var jsonValues = Object.values(json[e]);
+      console.log(json[e]);
       var txtArea =  document.getElementById('json-editor');
       var txtValue = txtArea.value;
       txtArea.selectionEnd = selectPos;
+      
+      if(e===1 || e===13){
 
-      if(txtArea.selectionEnd != 0){
-        var beforeTxt = txtValue.substring(0, txtArea.selectionEnd);
-         var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length);
-         if(afterTxt=='') afterTxt = ']}';  
-         if(count == 0) var addTxt = '\n\t\t\t\t{';
-         else var addTxt = '\n\t\t\t\t,{';
-          for(var i = 0; i < jsonLength; i++){
-            if(i==jsonLength-1) addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'"\n';
-            else addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'",';
-          }
-          addTxt = addTxt + '\t\t\t\t}\n';
-          setForm(beforeTxt + addTxt +afterTxt);
-          txtArea.selectionEnd = selectPos;
-
-      }
-      else{
-        if(txtValue.substring(selectPos-1,selectPos)=='[' || txtValue.substring(selectPos-2,selectPos-1)=='['){
-          var beforeTxt = txtValue.substring(0, selectPos); 
-          var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length);  
-          var afterTxt = txtValue.substring(txtValue.length-15, txtValue.length);    
-          var addTxt = '\n\t\t\t\t{';
-          for(var i = 0; i < jsonLength; i++){
-            if(i==jsonLength-1) addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'"\n';
-            else addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'",';
-          }
-          addTxt = addTxt + '\t\t\t\t}';
-          setForm(beforeTxt + addTxt + afterTxt);
-          txtArea.value = beforeTxt + addTxt + afterTxt;
-          selectPos = selectPos + addTxt.length;
-          txtArea.selectionEnd = selectPos; 
-        }
-        else if(count == 0){
-          var selectPos = txtValue.length-10;
-          var beforeTxt = txtValue.substring(0, selectPos);
-          var afterTxt = txtValue.substring(txtArea.selectionEnd+txtValue.length-14, txtValue.length); 
-          if(afterTxt=='') afterTxt = ']}';  
-          var addTxt = '\t{';
-          for(var i = 0; i < jsonLength; i++){
-            if(i==jsonLength-1) addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'"\n';
-            else addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'",';
-          }
-          addTxt = addTxt + '\t\t\t\t}\n';
-          setForm(beforeTxt + addTxt +afterTxt);
-          txtArea.value = beforeTxt + addTxt + afterTxt;
-          txtArea.selectionEnd = selectPos;
-        }
-        else if(groupElement == 1){
-          var selectPos = txtValue.length-10;
-          var beforeTxt = txtValue.substring(0, selectPos);
-          var afterTxt = txtValue.substring(selectPos, txtValue.length); 
-          var addTxt = '\t{';
-          for(var i = 0; i < jsonLength; i++){
-            if(i==jsonLength-1) addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'"\n';
-            else addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'",';
-          }
-          addTxt = addTxt + '\t\t\t\t}\n\t\t\t';
-          setForm(beforeTxt + addTxt + afterTxt);
-          txtArea.value = beforeTxt + addTxt + afterTxt;
-          selectPos = selectPos + addTxt.length;
-          txtArea.selectionEnd = selectPos; 
+        if(txtArea.selectionEnd != 0){
+          var beforeTxt = txtValue.substring(0, txtArea.selectionEnd);
+           var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length);
+           if(afterTxt=='') afterTxt = ']}';  
+           if(count == 0) var addTxt = '\n\t\t\t\t{';
+           else var addTxt = '\n\t\t\t\t,{';
         }
         else{
-          var txtArea =  document.getElementById('json-editor');
-          var txtValue = txtArea.value;
-          var selectPos = txtArea.selectionStart; 
-          var check;
-          if(selectPos=='') {
-            selectPos = txtValue.length-10;
-            check = 1;
-          }
-          if(txtValue.substring(selectPos-1,selectPos)=='}' || txtValue.substring(selectPos-2,selectPos-1)=='['){
+          if(txtValue.substring(selectPos-1,selectPos)=='[' || txtValue.substring(selectPos-2,selectPos-1)=='['){
             var beforeTxt = txtValue.substring(0, selectPos); 
             var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length);  
             var afterTxt = txtValue.substring(txtValue.length-15, txtValue.length);    
-            if(groupElement == 1) var addTxt = '\t{';
-            else var addTxt = '\n\t\t\t\t,{';
+            var addTxt = '\n\t\t\t\t{';
+          }
+          else if(count == 0){
+            var selectPos = txtValue.length-10;
+            var beforeTxt = txtValue.substring(0, selectPos);
+            var afterTxt = txtValue.substring(txtArea.selectionEnd+txtValue.length-14, txtValue.length); 
+            if(afterTxt=='') afterTxt = ']}';  
+            var addTxt = '\t{';
+          }
+          else if(groupElement == 1){
+            var selectPos = txtValue.length-10;
+            var beforeTxt = txtValue.substring(0, selectPos);
+            var afterTxt = txtValue.substring(selectPos, txtValue.length); 
+            var addTxt = '\t{';
+          }
+          else{
+            var txtArea =  document.getElementById('json-editor');
+            var txtValue = txtArea.value;
+            var selectPos = txtArea.selectionStart; 
+            var check;
+            if(selectPos=='') {
+              selectPos = txtValue.length-10;
+              check = 1;
+            }
+            if(txtValue.substring(selectPos-1,selectPos)=='}' || txtValue.substring(selectPos-2,selectPos-1)=='['){
+              var beforeTxt = txtValue.substring(0, selectPos); 
+              var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length);  
+              var afterTxt = txtValue.substring(txtValue.length-15, txtValue.length);    
+              if(groupElement == 1) var addTxt = '\t{';
+              else var addTxt = '\n\t\t\t\t,{';
+            }
+            else{
+              var beforeTxt = txtValue.substring(0, txtValue.length-10);
+              if(check==1) var afterTxt='\n\t\t\t]\n\t\t}\n\t]\n}';
+              else var afterTxt = txtValue.substring(txtValue.length-14, txtValue.length);    
+              if(groupElement == 1) var addTxt = '\t{';
+              else var addTxt = '\t,{';
+            }
+          }
+        }
+ 
+        // var beforeTxt = txtValue.substring(0, txtArea.selectionEnd);
+        // var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length);
+        // if(afterTxt=='') afterTxt = ']}';  
+        // if(count == 0) var addTxt = '\n\t\t\t\t{';
+        //  else var addTxt = '\n\t\t\t\t,{';
+          for(var i = 0; i < jsonLength; i++){
+            if(jsonKeys[i]==='options'){
+              addTxt = addTxt + '\n\t\t\t\t\t"'+jsonKeys[i]+'" :[';
+
+              var objectValues = Object.values(jsonValues[i]);
+              var objectLength = Object.keys(jsonValues[i]).length;
+
+              console.log("!!!!!!!");
+              console.log(objectLength);
+              // console.log("!!!!!!!");
+              for(var k = 0; k < objectLength; k++){
+                var optionKeys = Object.keys(objectValues[k]);
+                var optionValues = Object.values(objectValues[k]); 
+                // var optionLength = Object.keys(objectValues[i]).length;
+                if(k === objectLength-1)  addTxt = addTxt + '\n\t\t\t\t\t\t\t{"'+optionKeys[0]+'" : "' + optionValues[0] + '"}';
+                else addTxt = addTxt + '{"'+optionKeys[0]+'" : "' + optionValues[0] + '"},';
+              }
+
+              addTxt = addTxt + '],';
+              console.log("==================");
+              console.log(addTxt);
+            }
+            else{
+              if(i===jsonLength-1) addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'"\n';
+              else addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'",';
+            }
+            
+          }
+          addTxt = addTxt + '\t\t\t\t}\n';
+          setForm(beforeTxt + addTxt +afterTxt);
+          console.log(form);
+          txtArea.selectionEnd = selectPos;
+      }
+      /******************/ 
+      else{
+        if(txtArea.selectionEnd != 0){
+          var beforeTxt = txtValue.substring(0, txtArea.selectionEnd);
+           var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length);
+           if(afterTxt=='') afterTxt = ']}';  
+           if(count == 0) var addTxt = '\n\t\t\t\t{';
+           else var addTxt = '\n\t\t\t\t,{';
+            for(var i = 0; i < jsonLength; i++){
+              if(i==jsonLength-1) addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'"\n';
+              else addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'",';
+            }
+            addTxt = addTxt + '\t\t\t\t}\n';
+            setForm(beforeTxt + addTxt +afterTxt);
+            txtArea.selectionEnd = selectPos;
+  
+        }
+        else{
+          if(txtValue.substring(selectPos-1,selectPos)=='[' || txtValue.substring(selectPos-2,selectPos-1)=='['){
+            var beforeTxt = txtValue.substring(0, selectPos); 
+            var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length);  
+            var afterTxt = txtValue.substring(txtValue.length-15, txtValue.length);    
+            var addTxt = '\n\t\t\t\t{';
             for(var i = 0; i < jsonLength; i++){
               if(i==jsonLength-1) addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'"\n';
               else addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'",';
@@ -391,24 +432,82 @@ function FormPage() {
             selectPos = selectPos + addTxt.length;
             txtArea.selectionEnd = selectPos; 
           }
-          else{
-            var beforeTxt = txtValue.substring(0, txtValue.length-10);
-            if(check==1) var afterTxt='\n\t\t\t]\n\t\t}\n\t]\n}';
-            else var afterTxt = txtValue.substring(txtValue.length-14, txtValue.length);    
-            if(groupElement == 1) var addTxt = '\t{';
-            else var addTxt = '\t,{';
+          else if(count == 0){
+            var selectPos = txtValue.length-10;
+            var beforeTxt = txtValue.substring(0, selectPos);
+            var afterTxt = txtValue.substring(txtArea.selectionEnd+txtValue.length-14, txtValue.length); 
+            if(afterTxt=='') afterTxt = ']}';  
+            var addTxt = '\t{';
             for(var i = 0; i < jsonLength; i++){
               if(i==jsonLength-1) addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'"\n';
               else addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'",';
             }
             addTxt = addTxt + '\t\t\t\t}\n';
-            setForm(beforeTxt  +addTxt + afterTxt);
+            setForm(beforeTxt + addTxt +afterTxt);
+            txtArea.value = beforeTxt + addTxt + afterTxt;
+            txtArea.selectionEnd = selectPos;
+          }
+          else if(groupElement == 1){
+            var selectPos = txtValue.length-10;
+            var beforeTxt = txtValue.substring(0, selectPos);
+            var afterTxt = txtValue.substring(selectPos, txtValue.length); 
+            var addTxt = '\t{';
+            for(var i = 0; i < jsonLength; i++){
+              if(i==jsonLength-1) addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'"\n';
+              else addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'",';
+            }
+            addTxt = addTxt + '\t\t\t\t}\n\t\t\t';
+            setForm(beforeTxt + addTxt + afterTxt);
             txtArea.value = beforeTxt + addTxt + afterTxt;
             selectPos = selectPos + addTxt.length;
             txtArea.selectionEnd = selectPos; 
           }
-        }
-      }  
+          else{
+            var txtArea =  document.getElementById('json-editor');
+            var txtValue = txtArea.value;
+            var selectPos = txtArea.selectionStart; 
+            var check;
+            if(selectPos=='') {
+              selectPos = txtValue.length-10;
+              check = 1;
+            }
+            if(txtValue.substring(selectPos-1,selectPos)=='}' || txtValue.substring(selectPos-2,selectPos-1)=='['){
+              var beforeTxt = txtValue.substring(0, selectPos); 
+              var afterTxt = txtValue.substring(txtArea.selectionEnd, txtValue.length);  
+              var afterTxt = txtValue.substring(txtValue.length-15, txtValue.length);    
+              if(groupElement == 1) var addTxt = '\t{';
+              else var addTxt = '\n\t\t\t\t,{';
+              for(var i = 0; i < jsonLength; i++){
+                if(i==jsonLength-1) addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'"\n';
+                else addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'",';
+              }
+              addTxt = addTxt + '\t\t\t\t}';
+              setForm(beforeTxt + addTxt + afterTxt);
+              txtArea.value = beforeTxt + addTxt + afterTxt;
+              selectPos = selectPos + addTxt.length;
+              txtArea.selectionEnd = selectPos; 
+            }
+            else{
+              var beforeTxt = txtValue.substring(0, txtValue.length-10);
+              if(check==1) var afterTxt='\n\t\t\t]\n\t\t}\n\t]\n}';
+              else var afterTxt = txtValue.substring(txtValue.length-14, txtValue.length);    
+              if(groupElement == 1) var addTxt = '\t{';
+              else var addTxt = '\t,{';
+              for(var i = 0; i < jsonLength; i++){
+                if(i==jsonLength-1) addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'"\n';
+                else addTxt = addTxt+'\n\t\t\t\t\t"'+jsonKeys[i]+'" : "'+jsonValues[i]+'",';
+              }
+              addTxt = addTxt + '\t\t\t\t}\n';
+              setForm(beforeTxt  +addTxt + afterTxt);
+              txtArea.value = beforeTxt + addTxt + afterTxt;
+              selectPos = selectPos + addTxt.length;
+              txtArea.selectionEnd = selectPos; 
+            }
+          }
+        } 
+      }
+
+       
       setGroupElement(0);
     }
     setCount(count+1);

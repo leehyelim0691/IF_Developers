@@ -121,7 +121,7 @@
 {
     "id": "",
     "label": "Radio Label",
-    "value": "",
+    "value": "radio",
     "options": [
         {"option_label":"Option1"},
         {"option_label":"Option2"}
