@@ -26,7 +26,7 @@ i.사용자로부터 버튼을 이용해 Form 요소를 불러 오고, Json 데�
 ii. 구성된 Json 형식을 토대로 Form 생성
 iii. 해당 Form을 Template 으로 저장 및 다운로드
 
-<img width="1057" src="https://ifh.cc/g/vrDdFc.png">
+<img width="1057" src="https://user-images.githubusercontent.com/48082589/244878889-0ac913f6-86bf-4a0e-bbc2-813afe8ee34c.png">
 
 
 
@@ -50,31 +50,31 @@ iii. 해당 Form을 Template 으로 저장 및 다운로드
 
 1. 시작화면
 - 시작버튼을 누르면 Form 제작 화면으로 넘어갈 수 있다.
-<img width="500" src="https://ifh.cc/g/x8JkHC.jpg">
+<img width="500" src="https://user-images.githubusercontent.com/48082589/244878889-0ac913f6-86bf-4a0e-bbc2-813afe8ee34c.png">
 
 
 2. 메인화면
 - 왼쪽의 버튼을 눌러 Form의 Component를 생성할 수 있다.
-<img width="500" src="https://ifh.cc/g/9yJsYC.jpg">
+<img width="500" src="https://user-images.githubusercontent.com/48082589/244878890-77120ac8-d867-411b-b9e3-b2add95108ec.png">
 
 
 3. Form Preview
 - 생성된 Component의 Form을 확인할 수 있다.
-<img width="500" src="https://ifh.cc/g/rdFeAQ.jpg">
+<img width="500" src="https://user-images.githubusercontent.com/48082589/244878892-2c0fa160-76f1-404d-81bb-3328ed142696.png">
 
 
 4. Template 저장
 - 만들어진 Form을 Template으로 저장해 재사용할 수 있다.
-<img width="500" src="https://ifh.cc/g/haHREm.jpg">
+<img width="500" src="https://user-images.githubusercontent.com/48082589/244878893-81c81817-d03f-4b06-90d5-563a52bd834e.png">
 
 
 5. Template 불러오기
 - 저장된 Template을 눌러 Form을 불러 올 수 있다.
-<img width="500" src="https://ifh.cc/g/eGCrP9.jpg">
+<img width="500" src="https://user-images.githubusercontent.com/48082589/244878894-16351d6f-9de2-44b7-966b-0b63db88490d.png">
 
 
 6. Template 다운로드
 - 원하는 Form을 Json Format으로 로컬에 다운로드 할 수 있다.
-<img width="500" src="https://ifh.cc/g/am4TJg.jpg">
+<img width="500" src="https://user-images.githubusercontent.com/48082589/244878895-c5ccb815-06c3-4353-a40d-372c2b8fd169.png">
 
 
